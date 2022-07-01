@@ -1,6 +1,8 @@
 package org.example.controller;
 
+import org.example.models.Info;
 import org.example.models.OrderItem;
+import org.example.service.InfoService;
 import org.example.service.OrderItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +17,27 @@ import java.util.List;
 //@RequestMapping("/")
 public class MyController {
     private final OrderItemService orderItemService;
+    private final InfoService infoService;
 
-    public MyController(OrderItemService orderItemService) {
+    public MyController(OrderItemService orderItemService,
+                        InfoService infoService) {
         this.orderItemService = orderItemService;
+        this.infoService = infoService;
     }
 
     @RequestMapping("/")
     public String showAllOrderItems(Model model) {
 
         List<OrderItem> orderItems = orderItemService.getAllOrderItems();
+        List<Info> infos = infoService.getAllInfo();
+        Info info = infos.get(0);
+
+        String header = info.getName();
+        String footer = info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
+//        String footer = info.getCopyright() + " " + info.getName();
         model.addAttribute("allOrderItems", orderItems);
+        model.addAttribute("mytitle", header);
+        model.addAttribute("myfooter", footer);
 
         return "orderItems-All";
     }
