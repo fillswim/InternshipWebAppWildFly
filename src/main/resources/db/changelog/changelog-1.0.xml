@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1.0.0" author="oleg.filatov">
+        <createTable tableName="order_items">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="product" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="oleg.filatov">
+        <insert tableName="order_items">
+            <column name="product" value="Xbox"/>
+            <column name="quantity" value="3"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="product" value="Nintendo"/>
+            <column name="quantity" value="4"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="product" value="Iphone"/>
+            <column name="quantity" value="5"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
