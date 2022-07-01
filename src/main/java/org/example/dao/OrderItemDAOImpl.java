@@ -52,7 +52,17 @@ public class OrderItemDAOImpl implements OrderItemDAO{
     public OrderItem getOrderItem(int id) {
 
         Session session = sessionFactory.getCurrentSession();
-        OrderItem orderItem = session.get(OrderItem.class, id);
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<OrderItem> criteriaQuery = criteriaBuilder.createQuery(OrderItem.class);
+
+        Root<OrderItem> root = criteriaQuery.from(OrderItem.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), id));
+
+        Query<OrderItem> query = session.createQuery(criteriaQuery);
+        OrderItem orderItem = query.getSingleResult();
+
+//        OrderItem orderItem = session.get(OrderItem.class, id);
 
         return orderItem;
     }
