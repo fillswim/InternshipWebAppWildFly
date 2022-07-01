@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface OrderItemDAO {
 
-    public List<OrderItem> getAllOrderItems();
+    List<OrderItem> getAllOrderItems();
 
-    public void saveOrderItem(OrderItem orderItem);
+    void saveOrderItem(OrderItem orderItem);
 
-    public OrderItem getOrderItem(int id);
+    OrderItem getOrderItem(int id);
 
-    public void deleteOrderItem(int id);
+    void deleteOrderItem(int id);
 
 }
