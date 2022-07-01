@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -72,9 +73,17 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 
         Session session = sessionFactory.getCurrentSession();
 
-        Query<OrderItem> query = session.createQuery("delete from OrderItem where id =:orderItemId");
-        query.setParameter("orderItemId", id);
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaDelete<OrderItem> criteriaDelete = criteriaBuilder.createCriteriaDelete(OrderItem.class);
 
-        query.executeUpdate();
+        Root<OrderItem> root = criteriaDelete.from(OrderItem.class);
+        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+
+        session.createQuery(criteriaDelete).executeUpdate();
+
+//        Query<OrderItem> query = session.createQuery("delete from OrderItem where id =:orderItemId");
+//        query.setParameter("orderItemId", id);
+
+//        query.executeUpdate();
     }
 }
