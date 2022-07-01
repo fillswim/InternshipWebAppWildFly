@@ -1,11 +1,15 @@
 package org.example.dao;
 
 import org.example.models.OrderItem;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -23,7 +27,16 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 
         Session session = sessionFactory.getCurrentSession();
 
-        List<OrderItem> orderItems = session.createQuery("from OrderItem", OrderItem.class).getResultList();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<OrderItem> criteriaQuery = criteriaBuilder.createQuery(OrderItem.class);
+
+        Root<OrderItem> root = criteriaQuery.from(OrderItem.class);
+        criteriaQuery.select(root);
+
+        Query<OrderItem> query = session.createQuery(criteriaQuery);
+        List<OrderItem> orderItems = query.getResultList();
+
+//        List<OrderItem> orderItems = session.createQuery("from OrderItem", OrderItem.class).getResultList();
 
         return orderItems;
     }
