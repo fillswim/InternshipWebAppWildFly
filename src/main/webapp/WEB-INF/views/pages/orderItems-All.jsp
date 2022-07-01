@@ -23,7 +23,7 @@
 
             <tr>
                 <td>${item.product}</td>
-                <td>${item.quantity}</td>
+                <td style="text-align: center">${item.quantity}</td>
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href = '${updateButton}'"/>

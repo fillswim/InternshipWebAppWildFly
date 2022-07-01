@@ -20,8 +20,31 @@
 
         </createTable>
     </changeSet>
-
+    
     <changeSet id="1.0.1" author="oleg.filatov">
+        <createTable tableName="information">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(25)">
+                <constraints nullable="true" unique="true"/>
+            </column>
+
+            <column name="period" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="copyright" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+    
+
+    <changeSet id="1.0.2" author="oleg.filatov">
         <insert tableName="order_items">
             <column name="product" value="Xbox"/>
             <column name="quantity" value="3"/>
@@ -33,6 +56,14 @@
         <insert tableName="order_items">
             <column name="product" value="Iphone"/>
             <column name="quantity" value="5"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="oleg.filatov">
+        <insert tableName="information">
+            <column name="name" value="MySite.com"/>
+            <column name="period" value="2010-2022"/>
+            <column name="copyright" value="@Copyright"/>
         </insert>
     </changeSet>
 
