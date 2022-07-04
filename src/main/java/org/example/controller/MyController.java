@@ -34,7 +34,6 @@ public class MyController {
 
         String header = info.getName();
         String footer = info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
-//        String footer = info.getCopyright() + " " + info.getName();
         model.addAttribute("allOrderItems", orderItems);
         model.addAttribute("mytitle", header);
         model.addAttribute("myfooter", footer);
