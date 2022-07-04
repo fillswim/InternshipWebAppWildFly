@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.models.OrderItem;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -35,11 +34,8 @@ public class OrderItemDAOImpl implements OrderItemDAO{
         criteriaQuery.select(root);
 
         Query<OrderItem> query = session.createQuery(criteriaQuery);
-        List<OrderItem> orderItems = query.getResultList();
 
-//        List<OrderItem> orderItems = session.createQuery("from OrderItem", OrderItem.class).getResultList();
-
-        return orderItems;
+        return query.getResultList();
     }
 
     @Override
@@ -61,11 +57,8 @@ public class OrderItemDAOImpl implements OrderItemDAO{
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), id));
 
         Query<OrderItem> query = session.createQuery(criteriaQuery);
-        OrderItem orderItem = query.getSingleResult();
 
-//        OrderItem orderItem = session.get(OrderItem.class, id);
-
-        return orderItem;
+        return query.getSingleResult();
     }
 
     @Override
@@ -81,9 +74,5 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 
         session.createQuery(criteriaDelete).executeUpdate();
 
-//        Query<OrderItem> query = session.createQuery("delete from OrderItem where id =:orderItemId");
-//        query.setParameter("orderItemId", id);
-
-//        query.executeUpdate();
     }
 }
