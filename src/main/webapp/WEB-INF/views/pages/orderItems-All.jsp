@@ -13,12 +13,10 @@
 
         <c:forEach var="item" items="${allOrderItems}">
 
-<%--            <c:url var="updateButton" value="/updateOrderItem">--%>
             <c:url var="updateButton" value="/test/app01/updateOrderItem">
                 <c:param name="itemId" value="${item.id}"/>
             </c:url>
 
-<%--            <c:url var="deleteButton" value="/deleteOrderItem">--%>
             <c:url var="deleteButton" value="/test/app01/deleteOrderItem">
                 <c:param name="itemId" value="${item.id}"/>
             </c:url>
