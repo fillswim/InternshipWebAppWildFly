@@ -44,16 +44,16 @@ public class MyConfig {
 //            dataSource.setPassword("password");
 
             //MySQL
-            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/db");
-            dataSource.setUser("user");
-            dataSource.setPassword("password");
+//            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+//            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/db");
+//            dataSource.setUser("user");
+//            dataSource.setPassword("password");
 
             //H2
-//            dataSource.setDriverClass("org.h2.Driver");
-//            dataSource.setJdbcUrl("jdbc:h2:mem:testdb");
-//            dataSource.setUser("sa");
-//            dataSource.setPassword("");
+            dataSource.setDriverClass("org.h2.Driver");
+            dataSource.setJdbcUrl("jdbc:h2:mem:testdb");
+            dataSource.setUser("sa");
+            dataSource.setPassword("");
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
@@ -69,8 +69,8 @@ public class MyConfig {
         sessionFactory.setPackagesToScan("org.example.models");
 
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-//        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+//        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
 
         sessionFactory.setHibernateProperties(hibernateProperties);
