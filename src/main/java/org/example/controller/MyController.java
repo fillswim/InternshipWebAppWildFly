@@ -54,7 +54,7 @@ public class MyController {
 
         orderItemService.saveOrderItem(orderItem);
 
-        return "redirect:/";
+        return "redirect:/test/app01/";
     }
 
     @RequestMapping("/updateOrderItem")
@@ -71,7 +71,7 @@ public class MyController {
 
         orderItemService.deleteOrderItem(id);
 
-        return "redirect:/";
+        return "redirect:/test/app01/";
     }
 
 }
