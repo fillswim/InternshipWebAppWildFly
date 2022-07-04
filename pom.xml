@@ -64,7 +64,6 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.4.31.Final</version>
-<!--      <version>6.1.0.Final</version>-->
     </dependency>
 
     <dependency>
@@ -113,7 +112,6 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-<!--      <version>2.1.214</version>-->
       <version>1.4.200</version>
       <scope>runtime</scope>
     </dependency>
@@ -123,13 +121,12 @@
 
   <build>
     <finalName>InternshipWebAppWildFly</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
