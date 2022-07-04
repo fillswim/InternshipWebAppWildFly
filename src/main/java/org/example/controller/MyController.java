@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/test/app01")
-//@RequestMapping("/")
+@RequestMapping("/test/app01")
 public class MyController {
     private final OrderItemService orderItemService;
     private final InfoService infoService;
