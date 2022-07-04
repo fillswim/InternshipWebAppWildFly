@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-//import org.springframework.web.servlet.view.JstlView;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -23,25 +22,17 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class MyConfig {
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("index");
-//    }
-
-    // Настройка для JSP страниц
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver internalResourceViewResolver =
                 new InternalResourceViewResolver();
 
-//        viewResolver.setViewClass(JstlView.class);
         internalResourceViewResolver.setPrefix("/WEB-INF/views/pages/");
         internalResourceViewResolver.setSuffix(".jsp");
 
         return internalResourceViewResolver;
     }
 
-    // Создается пул подключений
     @Bean
     public DataSource dataSource() {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -70,7 +61,6 @@ public class MyConfig {
         return dataSource;
     }
 
-    // Создание бина SessionFactory
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
 
@@ -79,8 +69,6 @@ public class MyConfig {
         sessionFactory.setPackagesToScan("org.example.models");
 
         Properties hibernateProperties = new Properties();
-//        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
-//        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 //        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
