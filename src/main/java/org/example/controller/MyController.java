@@ -24,7 +24,7 @@ public class MyController {
         this.infoService = infoService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping()
     public String showAllOrderItems(Model model) {
 
         List<OrderItem> orderItems = orderItemService.getAllOrderItems();
