@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/test/app01")
 public class MyController {
     private final OrderItemService orderItemService;
     private final InfoService infoService;
@@ -54,7 +53,7 @@ public class MyController {
 
         orderItemService.saveOrderItem(orderItem);
 
-        return "redirect:/test/app01/";
+        return "redirect:/";
     }
 
     @RequestMapping("/updateOrderItem")
@@ -71,7 +70,7 @@ public class MyController {
 
         orderItemService.deleteOrderItem(id);
 
-        return "redirect:/test/app01/";
+        return "redirect:/";
     }
 
 }
