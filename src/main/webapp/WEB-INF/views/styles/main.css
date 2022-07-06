@@ -1,0 +1,25 @@
+#mainTable {
+    width: 100%;
+    height: 100%;
+}
+
+#orderItems {
+    width: 100%;
+}
+
+#orderItems td, #orderItems th {
+    border: 1px solid #ddd;
+}
+
+#orderItems th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: lightgreen;
+    color: white;
+}
+
+#addButton {
+    width: 25%;
+    float: initial;
+}
