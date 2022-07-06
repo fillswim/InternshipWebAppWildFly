@@ -23,15 +23,26 @@ public class MyController {
         this.infoService = infoService;
     }
 
+    private String getHeader() {
+        return infoService.getAllInfo().get(0).getName();
+    }
+
+    private String getFooter() {
+
+        List<Info> infos = infoService.getAllInfo();
+        Info info = infos.get(0);
+
+        return info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
+    }
+
     @RequestMapping()
     public String showAllOrderItems(Model model) {
 
         List<OrderItem> orderItems = orderItemService.getAllOrderItems();
-        List<Info> infos = infoService.getAllInfo();
-        Info info = infos.get(0);
 
-        String header = info.getName();
-        String footer = info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
+        String header = getHeader();
+        String footer = getFooter();
+
         model.addAttribute("allOrderItems", orderItems);
         model.addAttribute("mytitle", header);
         model.addAttribute("myfooter", footer);
@@ -44,6 +55,12 @@ public class MyController {
 
         OrderItem orderItem = new OrderItem();
         model.addAttribute("orderItem", orderItem);
+
+        String header = getHeader();
+        String footer = getFooter();
+
+        model.addAttribute("mytitle", header);
+        model.addAttribute("myfooter", footer);
 
         return "orderItem-Details";
     }
