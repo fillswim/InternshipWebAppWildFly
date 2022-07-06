@@ -3,14 +3,17 @@
 
     <h3>All order items:</h3>
 
-    <table>
+    <table id="orderItems">
 
+        <thead>
         <tr>
             <th>Product</th>
             <th>Quantity</th>
             <th>Operations</th>
         </tr>
+        </thead>
 
+        <tbody>
         <c:forEach var="item" items="${allOrderItems}">
 
             <c:url var="updateButton" value="/updateOrderItem">
@@ -22,23 +25,24 @@
             </c:url>
 
             <tr>
-                <td>${item.product}</td>
-                <td style="text-align: center">${item.quantity}</td>
-                <td>
-                    <input type="button" value="Update"
+                <td style="width: 25%">${item.product}</td>
+                <td style="width: 25%; text-align: center">${item.quantity}</td>
+                <td style="width: 50%; text-align: center">
+                    <input type="button" value="Update" style="width: 49%"
                            onclick="window.location.href = '${updateButton}'"/>
-                    <input type="button" value="Delete"
+                    <input type="button" value="Delete" style="width: 49%"
                            onclick="window.location.href = '${deleteButton}'"/>
                 </td>
             </tr>
 
         </c:forEach>
+        </tbody>
 
     </table>
 
     <br>
 
-    <input type="button" value="Add"
+    <input id="addButton" type="button" value="Add"
            onclick="window.location.href='addNewOrderItem'">
 
 </div>
