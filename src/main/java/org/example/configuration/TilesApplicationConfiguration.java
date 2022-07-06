@@ -40,7 +40,14 @@ public class TilesApplicationConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("/static/");
+
+        registry.addResourceHandler("/styles/**")
+                .addResourceLocations("/WEB-INF/views/styles/");
+
+        registry.addResourceHandler("/scripts/**")
+                .addResourceLocations("/WEB-INF/views/js/");
     }
 
 }
