@@ -79,6 +79,12 @@ public class MyController {
         OrderItem orderItem = orderItemService.getOrderItem(id);
         model.addAttribute("orderItem", orderItem);
 
+        String header = getHeader();
+        String footer = getFooter();
+
+        model.addAttribute("mytitle", header);
+        model.addAttribute("myfooter", footer);
+
         return "orderItem-Details";
     }
 
