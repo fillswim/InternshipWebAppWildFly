@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="org.example"/>
+
+    <mvc:annotation-driven/>
+
+    <!-- this make apache tiles to work -->
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+    </bean>
+
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/views/tiles/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+
+        <!--MySQL Locale-->
+        <!--        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />-->
+        <!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db" />-->
+        <!--        <property name="user" value="user" />-->
+        <!--        <property name="password" value="password" />-->
+
+        <!--H2-->
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="jdbcUrl" value="jdbc:h2:mem:testdb"/>
+        <property name="user" value="sa"/>
+        <property name="password" value=""/>
+
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="org.example.models"/>
+        <property name="hibernateProperties">
+            <props>
+
+                <!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+
+                <!--Настройка автоматического создания таблиц-->
+                <!--                <prop key="hibernate.hbm2ddl.auto">update</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="LiquibaseUpdater" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db/changelog/changelog-master.xml"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <mvc:resources mapping="/styles/**" location="/WEB-INF/views/styles/"/>
+    <mvc:resources mapping="/scripts/**" location="/WEB-INF/views/js/"/>
+
+
+</beans>
