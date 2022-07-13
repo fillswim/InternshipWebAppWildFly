@@ -13,16 +13,28 @@
         <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/defaultFooter.jsp" />
     </definition>
 
-    <!--All OrderItems-->
-    <definition name="orderItems-All" extends="template-def">
-        <put-attribute name="title" value="All order items" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/orderItems-All.jsp" />
+    <!--All products for admins-->
+    <definition name="products-All-for-Admins" extends="template-def">
+        <put-attribute name="title" value="All products" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/products-All-for-Admins.jsp" />
     </definition>
 
-    <!--Order item details-->
-    <definition name="orderItem-Details" extends="template-def">
-        <put-attribute name="title" value="Order item details" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/orderItem-Details.jsp" />
+    <!--All products for customers-->
+    <definition name="products-All-for-Customers" extends="template-def">
+        <put-attribute name="title" value="All products" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/products-All-for-Customers.jsp" />
+    </definition>
+
+    <!--Product details-->
+    <definition name="product-Details" extends="template-def">
+        <put-attribute name="title" value="Product details" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/product-Details.jsp" />
+    </definition>
+
+    <!--All bucket details-->
+    <definition name="bucketdetails" extends="template-def">
+        <put-attribute name="title" value="Bucket" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/bucketdetails.jsp" />
     </definition>
 
 </tiles-definitions>
