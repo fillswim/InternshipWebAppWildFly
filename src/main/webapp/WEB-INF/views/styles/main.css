@@ -3,15 +3,15 @@
     height: 100%;
 }
 
-#orderItems {
+#productsTable {
     width: 100%;
 }
 
-#orderItems td, #orderItems th {
+#productsTable td, #productsTable th {
     border: 1px solid #ddd;
 }
 
-#orderItems th {
+#productsTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -20,6 +20,11 @@
 }
 
 #addButton {
+    width: 25%;
+    float: initial;
+}
+
+#editProductsButton {
     width: 25%;
     float: initial;
 }
