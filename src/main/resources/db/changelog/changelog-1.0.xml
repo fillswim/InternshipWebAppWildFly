@@ -4,24 +4,45 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="1.0.0" author="oleg.filatov">
-        <createTable tableName="order_items">
+        <createTable tableName="products">
 
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="product" type="varchar(100)">
+            <column name="title" type="varchar(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="quantity" type="int">
+            <column name="price" type="int">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
     </changeSet>
-    
+
     <changeSet id="1.0.1" author="oleg.filatov">
+        <createTable tableName="bucket_details">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="product_id" type="int"></column>
+            <column name="amount" type="int"></column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="oleg.filatov">
+        <addForeignKeyConstraint baseTableName="bucket_details"
+                                 baseColumnNames="product_id"
+                                 constraintName="fk_bucket_details_products"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    
+    <changeSet id="1.0.3" author="oleg.filatov">
         <createTable tableName="information">
 
             <column name="id" type="int" autoIncrement="true">
@@ -44,22 +65,29 @@
     </changeSet>
     
 
-    <changeSet id="1.0.2" author="oleg.filatov">
-        <insert tableName="order_items">
-            <column name="product" value="Xbox"/>
-            <column name="quantity" value="3"/>
+    <changeSet id="1.0.4" author="oleg.filatov">
+        <insert tableName="products">
+            <column name="title" value="Xbox"/>
+            <column name="price" value="1500"/>
         </insert>
-        <insert tableName="order_items">
-            <column name="product" value="Nintendo"/>
-            <column name="quantity" value="4"/>
+        <insert tableName="products">
+            <column name="title" value="Nintendo"/>
+            <column name="price" value="1000"/>
         </insert>
-        <insert tableName="order_items">
-            <column name="product" value="Iphone"/>
-            <column name="quantity" value="5"/>
+        <insert tableName="products">
+            <column name="title" value="Iphone"/>
+            <column name="price" value="2000"/>
         </insert>
     </changeSet>
 
-    <changeSet id="1.0.3" author="oleg.filatov">
+    <changeSet id="1.0.5" author="oleg.filatov">
+        <insert tableName="bucket_details">
+            <column name="product_id" value="1"/>
+            <column name="amount" value="3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="oleg.filatov">
         <insert tableName="information">
             <column name="name" value="MySite.com"/>
             <column name="period" value="2010-2022"/>
