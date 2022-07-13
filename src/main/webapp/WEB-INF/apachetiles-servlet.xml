@@ -29,10 +29,10 @@
           destroy-method="close">
 
         <!--MySQL Locale-->
-        <!--        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />-->
-        <!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db" />-->
-        <!--        <property name="user" value="user" />-->
-        <!--        <property name="password" value="password" />-->
+<!--        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db"/>-->
+<!--        <property name="user" value="user"/>-->
+<!--        <property name="password" value="password"/>-->
 
         <!--H2-->
         <property name="driverClass" value="org.h2.Driver"/>
@@ -49,12 +49,12 @@
         <property name="hibernateProperties">
             <props>
 
-                <!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
+<!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
 
                 <!--Настройка автоматического создания таблиц-->
-                <!--                <prop key="hibernate.hbm2ddl.auto">update</prop>-->
+<!--                <prop key="hibernate.hbm2ddl.auto">update</prop>-->
             </props>
         </property>
     </bean>
