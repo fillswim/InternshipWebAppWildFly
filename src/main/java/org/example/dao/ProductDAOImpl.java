@@ -61,7 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void deleteProductById(int productId) {
+    public void deleteProduct(int productId) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -72,5 +72,12 @@ public class ProductDAOImpl implements ProductDAO {
         criteriaDelete.where(criteriaBuilder.equal(root.get("id"), productId));
 
         session.createQuery(criteriaDelete).executeUpdate();
+    }
+
+    @Override
+    public void deleteProduct(Product product) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(product);
     }
 }
