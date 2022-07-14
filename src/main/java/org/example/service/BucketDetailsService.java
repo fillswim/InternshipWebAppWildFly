@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface BucketDetailsService {
 
-    public List<BucketDetails> findAllBucketDetails();
+    List<BucketDetails> findAllBucketDetails();
 
-    public BucketDetails getBucketDetailsByProductId(int productId);
+    BucketDetails getBucketDetailsByProductId(int productId);
 
-    public void saveBucketDetails(BucketDetails bucketDetails);
+    void saveBucketDetails(BucketDetails bucketDetails);
 
-    public void deleteBucketDetailsById(int bucketDetailsId);
+    void deleteBucketDetailsById(int bucketDetailsId);
 
 }
