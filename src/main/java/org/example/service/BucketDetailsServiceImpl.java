@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.dao.BucketDetailsDAO;
 import org.example.models.BucketDetails;
+import org.example.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,13 @@ public class BucketDetailsServiceImpl implements BucketDetailsService{
     }
 
     @Override
-    public BucketDetails getBucketDetailsByProductId(int productId) {
-        return bucketDetailsDAO.getBucketDetailsByProductId(productId);
+    public BucketDetails getBucketDetailsByProduct(int productId) {
+        return bucketDetailsDAO.getBucketDetailsByProduct(productId);
+    }
+
+    @Override
+    public BucketDetails getBucketDetailsByProduct(Product product) {
+        return bucketDetailsDAO.getBucketDetailsByProduct(product);
     }
 
     @Override
