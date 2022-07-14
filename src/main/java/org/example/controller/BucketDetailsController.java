@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.dto.BucketDetailsDTO;
+import org.example.mappers.BucketDetailsMapper;
 import org.example.models.BucketDetails;
 import org.example.models.Info;
 import org.example.service.BucketDetailsService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bucketdetails")
@@ -18,10 +21,14 @@ public class BucketDetailsController {
     private final InfoService infoService;
     private final BucketDetailsService bucketDetailsService;
 
+    private final BucketDetailsMapper bucketDetailsMapper;
+
     public BucketDetailsController(InfoService infoService,
-                                   BucketDetailsService bucketDetailsService) {
+                                   BucketDetailsService bucketDetailsService,
+                                   BucketDetailsMapper bucketDetailsMapper) {
         this.infoService = infoService;
         this.bucketDetailsService = bucketDetailsService;
+        this.bucketDetailsMapper = bucketDetailsMapper;
     }
 
     private String getHeader() {
@@ -39,8 +46,13 @@ public class BucketDetailsController {
     @GetMapping
     public String showAllBucketDetails(Model model) {
 
-        List<BucketDetails> bucketDetails = bucketDetailsService.findAllBucketDetails();
-        model.addAttribute("bucketDetails", bucketDetails);
+        List<BucketDetails> allBucketDetails = bucketDetailsService.findAllBucketDetails();
+
+        List<BucketDetailsDTO> bucketDetailsDTOS = allBucketDetails.stream()
+                .map(bucketDetailsMapper::mapToBucketDetailsDTO)
+                .collect(Collectors.toList());
+
+        model.addAttribute("bucketDetails", bucketDetailsDTOS);
 
         String header = getHeader();
         String footer = getFooter();
