@@ -27,8 +27,5 @@
 
     </table>
 
-    <input id="addButton" type="button" value="Return to all products"
-           onclick="window.location.href='/test/app01'">
-
 </div>
 

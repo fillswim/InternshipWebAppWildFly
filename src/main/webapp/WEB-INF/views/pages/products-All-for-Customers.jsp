@@ -40,12 +40,5 @@
 
     </table>
 
-    <input id="addButton" type="button" value="Go to bucket"
-           onclick="window.location.href='/test/app01/bucketdetails'">
-    <br>
-    <br>
-    <input id="editProductsButton" type="button" value="Edit products"
-           onclick="window.location.href='/test/app01/edit'">
-
 </div>
 

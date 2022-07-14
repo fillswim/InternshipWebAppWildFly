@@ -42,13 +42,8 @@
 
     <br>
 
-    <input id="addButton" type="button" value="Add"
+    <input id="addButton" type="button" value="Add product"
            onclick="window.location.href='addNewProduct'">
-
-    <br>
-    <br>
-    <input id="returnToAllCustomersButton" type="button" value="Return shopping"
-           onclick="window.location.href='/test/app01'">
 
 </div>
 
