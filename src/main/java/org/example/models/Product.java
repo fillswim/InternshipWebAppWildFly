@@ -1,15 +1,16 @@
 package org.example.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "products")
@@ -24,6 +25,7 @@ public class Product {
     private Double price;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private BucketDetails bucketDetails;
 
 }
