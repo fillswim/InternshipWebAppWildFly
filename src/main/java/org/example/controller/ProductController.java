@@ -63,7 +63,7 @@ public class ProductController {
         List<Product> products = productService.getAllProducts();
 
         List<ProductDTO> productDTOS = products.stream()
-                .map(product -> productMapper.mapToProductDto(product))
+                .map(productMapper::mapToProductDto)
                 .collect(Collectors.toList());
 
         model.addAttribute("products", productDTOS);
@@ -82,7 +82,7 @@ public class ProductController {
         List<Product> products = productService.getAllProducts();
 
         List<ProductDTO> productDTOS = products.stream()
-                .map(product -> productMapper.mapToProductDto(product))
+                .map(productMapper::mapToProductDto)
                 .collect(Collectors.toList());
 
         model.addAttribute("products", productDTOS);
