@@ -127,7 +127,8 @@ public class ProductController {
     @GetMapping("/addProductToBucket")
     public String addProductToBucket(@RequestParam("productId") int productId) {
 
-        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProductId(productId);
+        Product product = productService.getProductById(productId);
+        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProduct(product);
 
         if (bucketDetails != null) {
 
@@ -137,10 +138,10 @@ public class ProductController {
             bucketDetailsService.saveBucketDetails(bucketDetails);
         } else {
 
-            Product product = productService.getProductById(productId);
+            Product newProduct = productService.getProductById(productId);
 
             BucketDetails newBucketDetails = BucketDetails.builder()
-                    .product(product)
+                    .product(newProduct)
                     .amount(1)
                     .build();
 
@@ -153,7 +154,8 @@ public class ProductController {
     @GetMapping("/deleteProductFromBucket")
     public String deleteProductFromBucket(@RequestParam("productId") int productId) {
 
-        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProductId(productId);
+        Product product = productService.getProductById(productId);
+        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProduct(product);
 
         if (bucketDetails != null) {
 
