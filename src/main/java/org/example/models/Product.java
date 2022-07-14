@@ -23,4 +23,7 @@ public class Product {
 
     private Double price;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private BucketDetails bucketDetails;
+
 }
