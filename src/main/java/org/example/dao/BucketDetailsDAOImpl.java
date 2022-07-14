@@ -40,31 +40,18 @@ public class BucketDetailsDAOImpl implements BucketDetailsDAO {
     @Override
     public BucketDetails getBucketDetailsByProductId(int productId) {
 
-//        @Query("select b from BucketDetails b where b.product.id = ?1")
-
         Session session = sessionFactory.getCurrentSession();
 
-//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//        CriteriaQuery<BucketDetails> criteriaQuery = criteriaBuilder.createQuery(BucketDetails.class);
-//
-//        Root<BucketDetails> root = criteriaQuery.from(BucketDetails.class);
-//        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("product_id"), productId));
-//
-//        Query<BucketDetails> query = session.createQuery(criteriaQuery);
-//
-//        return query.getSingleResult();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<BucketDetails> criteriaQuery = criteriaBuilder.createQuery(BucketDetails.class);
 
-//        Query<BucketDetails> query = session.createQuery("SELECT *\n" +
-//                "from bucket_details\n" +
-//                "where product_id = :productId");
+        Root<BucketDetails> root = criteriaQuery.from(BucketDetails.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("product").get("id"), productId));
 
-        Query<BucketDetails> query = session
-                .createQuery("select b from BucketDetails b where b.product.id = :productId",
-                        BucketDetails.class);
+        Query<BucketDetails> query = session.createQuery(criteriaQuery);
 
-        query.setParameter("productId", productId);
+        BucketDetails bucketDetails;
 
-        BucketDetails bucketDetails = null;
         try {
             bucketDetails = query.getSingleResult();
         } catch (Exception e) {
