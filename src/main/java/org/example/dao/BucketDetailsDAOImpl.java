@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.models.BucketDetails;
+import org.example.models.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -38,7 +39,7 @@ public class BucketDetailsDAOImpl implements BucketDetailsDAO {
     }
 
     @Override
-    public BucketDetails getBucketDetailsByProductId(int productId) {
+    public BucketDetails getBucketDetailsByProduct(int productId) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -47,6 +48,30 @@ public class BucketDetailsDAOImpl implements BucketDetailsDAO {
 
         Root<BucketDetails> root = criteriaQuery.from(BucketDetails.class);
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("product").get("id"), productId));
+
+        Query<BucketDetails> query = session.createQuery(criteriaQuery);
+
+        BucketDetails bucketDetails;
+
+        try {
+            bucketDetails = query.getSingleResult();
+        } catch (Exception e) {
+            bucketDetails = null;
+        }
+
+        return bucketDetails;
+    }
+
+    @Override
+    public BucketDetails getBucketDetailsByProduct(Product product) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<BucketDetails> criteriaQuery = criteriaBuilder.createQuery(BucketDetails.class);
+
+        Root<BucketDetails> root = criteriaQuery.from(BucketDetails.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("product"), product));
 
         Query<BucketDetails> query = session.createQuery(criteriaQuery);
 
