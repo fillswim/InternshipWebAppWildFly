@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.dto.ProductDTO;
+import org.example.mappers.ProductMapper;
 import org.example.models.BucketDetails;
 import org.example.models.Info;
 import org.example.models.Product;
@@ -10,9 +12,13 @@ import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -24,14 +30,18 @@ public class ProductController {
 
     private final BucketDetailsService bucketDetailsService;
 
+    private final ProductMapper productMapper;
+
 
     @Autowired
     public ProductController(InfoService infoService,
                              ProductService productService,
-                             BucketDetailsService bucketDetailsService) {
+                             BucketDetailsService bucketDetailsService,
+                             ProductMapper productMapper) {
         this.infoService = infoService;
         this.productService = productService;
         this.bucketDetailsService = bucketDetailsService;
+        this.productMapper = productMapper;
     }
 
     private String getHeader() {
@@ -51,7 +61,12 @@ public class ProductController {
     public String showAllProducts(Model model) {
 
         List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
+
+        List<ProductDTO> productDTOS = products.stream()
+                .map(product -> productMapper.mapToProductDto(product))
+                .collect(Collectors.toList());
+
+        model.addAttribute("products", productDTOS);
 
         String header = getHeader();
         String footer = getFooter();
@@ -65,7 +80,12 @@ public class ProductController {
     public String showAllProductsForAdmins(Model model) {
 
         List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
+
+        List<ProductDTO> productDTOS = products.stream()
+                .map(product -> productMapper.mapToProductDto(product))
+                .collect(Collectors.toList());
+
+        model.addAttribute("products", productDTOS);
 
         String header = getHeader();
         String footer = getFooter();
@@ -80,8 +100,8 @@ public class ProductController {
     @GetMapping("/addNewProduct")
     public String addNewProduct(Model model) {
 
-        Product product = new Product();
-        model.addAttribute("product", product);
+        ProductDTO productDTO = new ProductDTO();
+        model.addAttribute("product", productDTO);
 
         String header = getHeader();
         String footer = getFooter();
@@ -93,7 +113,9 @@ public class ProductController {
     }
 
     @PostMapping("/saveProduct")
-    public String saveProduct(@ModelAttribute("product") Product product) {
+    public String saveProduct(@ModelAttribute("product") ProductDTO productDTO) {
+
+        Product product = productMapper.mapToProduct(productDTO);
 
         productService.saveProduct(product);
 
@@ -105,7 +127,10 @@ public class ProductController {
                                 Model model) {
 
         Product product = productService.getProductById(productId);
-        model.addAttribute("product", product);
+
+        ProductDTO productDTO = productMapper.mapToProductDto(product);
+
+        model.addAttribute("product", productDTO);
 
         String header = getHeader();
         String footer = getFooter();
