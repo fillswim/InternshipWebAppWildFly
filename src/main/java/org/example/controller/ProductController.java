@@ -117,7 +117,10 @@ public class ProductController {
 
     @GetMapping("/deleteProduct")
     public String deleteProduct(@RequestParam("productId") int productId) {
-        productService.deleteProductById(productId);
+
+        Product product = productService.getProductById(productId);
+        productService.deleteProduct(product);
+
         return "redirect:/edit";
     }
 
