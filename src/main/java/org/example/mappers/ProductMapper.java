@@ -13,6 +13,7 @@ public class ProductMapper {
                 .id(product.getId())
                 .title(product.getTitle())
                 .price(product.getPrice())
+                .manufacturerTitle(product.getManufacturer().getTitle())
                 .build();
     }
 
