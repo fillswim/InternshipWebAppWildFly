@@ -8,6 +8,7 @@ import org.example.models.Info;
 import org.example.models.Product;
 import org.example.service.BucketDetailsService;
 import org.example.service.InfoService;
+import org.example.service.ManufacturerService;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,8 @@ public class ProductController {
     public ProductController(InfoService infoService,
                              ProductService productService,
                              BucketDetailsService bucketDetailsService,
-                             ProductMapper productMapper) {
+                             ProductMapper productMapper,
+                             ManufacturerService manufacturerService) {
         this.infoService = infoService;
         this.productService = productService;
         this.bucketDetailsService = bucketDetailsService;
@@ -115,7 +117,15 @@ public class ProductController {
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("product") ProductDTO productDTO) {
 
-        Product product = productMapper.mapToProduct(productDTO);
+        Product product = productService.getProductById(productDTO.getId());
+
+        if ((productDTO.getTitle() != null) && (!productDTO.getTitle().equals(product.getTitle()))) {
+            product.setTitle(productDTO.getTitle());
+        }
+
+        if ((product.getPrice() != null) && (productDTO.getPrice() != product.getPrice())) {
+            product.setPrice(productDTO.getPrice());
+        }
 
         productService.saveProduct(product);
 
