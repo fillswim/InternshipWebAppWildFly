@@ -28,38 +28,5 @@
 
   </table>
 
-<%--  <select name="manufacturers">--%>
-<%--    <c:forEach var="manufacturer" items="${manufacturers}">--%>
-<%--      <option value="${manufacturer.id}">${manufacturer.title}</option>--%>
-<%--    </c:forEach>--%>
-<%--  </select>--%>
-
-<%--  <form action="manufacturers/addManufacturer" method="post">--%>
-
-<%--    <select name="manufacturer">--%>
-<%--      <c:forEach var="manufacturer" items="${manufacturers}">--%>
-<%--        <option value="${manufacturer.id}">${manufacturer.title}</option>--%>
-<%--      </c:forEach>--%>
-<%--    </select>--%>
-<%--    <br>--%>
-<%--    <br>--%>
-<%--    <input type="submit" value="Send"/>--%>
-
-<%--  </form>--%>
-
-  <form action="manufacturers/addManufacturer" method="get">
-
-    <select name="manufacturer">
-      <c:forEach var="manufacturer" items="${manufacturers}">
-        <option value="${manufacturer.id}">${manufacturer.title}</option>
-      </c:forEach>
-    </select>
-    <br>
-    <br>
-    <input type="submit" value="Send"/>
-
-  </form>
-
-
 </div>
 
