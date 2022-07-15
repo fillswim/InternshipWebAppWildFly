@@ -5,6 +5,7 @@ import org.example.dto.ProductDTO;
 import org.example.mappers.ProductMapper;
 import org.example.models.BucketDetails;
 import org.example.models.Info;
+import org.example.models.Manufacturer;
 import org.example.models.Product;
 import org.example.service.BucketDetailsService;
 import org.example.service.InfoService;
@@ -33,6 +34,8 @@ public class ProductController {
 
     private final ProductMapper productMapper;
 
+    private final ManufacturerService manufacturerService;
+
 
     @Autowired
     public ProductController(InfoService infoService,
@@ -44,6 +47,7 @@ public class ProductController {
         this.productService = productService;
         this.bucketDetailsService = bucketDetailsService;
         this.productMapper = productMapper;
+        this.manufacturerService = manufacturerService;
     }
 
     private String getHeader() {
@@ -123,8 +127,15 @@ public class ProductController {
             product.setTitle(productDTO.getTitle());
         }
 
-        if ((product.getPrice() != null) && (productDTO.getPrice() != product.getPrice())) {
+        if ((productDTO.getPrice() != null) && (productDTO.getPrice() != product.getPrice())) {
             product.setPrice(productDTO.getPrice());
+        }
+
+        if ((productDTO.getManufacturerId() != 0)
+                && (productDTO.getManufacturerId() != product.getManufacturer().getId())) {
+
+            Manufacturer manufacturer = manufacturerService.getManufacturerById(productDTO.getManufacturerId());
+            product.setManufacturer(manufacturer);
         }
 
         productService.saveProduct(product);
@@ -137,10 +148,11 @@ public class ProductController {
                                 Model model) {
 
         Product product = productService.getProductById(productId);
-
         ProductDTO productDTO = productMapper.mapToProductDto(product);
-
         model.addAttribute("product", productDTO);
+
+        List<Manufacturer> manufacturers = manufacturerService.getAllManufacturer();
+        model.addAttribute("manufacturers", manufacturers);
 
         String header = getHeader();
         String footer = getFooter();
