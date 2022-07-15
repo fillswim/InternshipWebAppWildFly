@@ -26,4 +26,8 @@ public class Product {
     @ToString.Exclude
     private BucketDetails bucketDetails;
 
+    @ManyToOne
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
+
 }
