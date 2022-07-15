@@ -17,6 +17,8 @@ public class ProductDTO {
 
     private Double price;
 
+    private int manufacturerId;
+
     private String manufacturerTitle;
 
 }
