@@ -37,4 +37,9 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/bucketdetails.jsp" />
     </definition>
 
+    <definition name="manufacturers" extends="template-def">
+        <put-attribute name="title" value="Manufacturers" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/manufacturers.jsp" />
+    </definition>
+
 </tiles-definitions>

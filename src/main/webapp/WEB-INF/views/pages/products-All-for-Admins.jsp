@@ -8,6 +8,7 @@
         <thead>
         <tr>
             <th>Title</th>
+            <th>Manufacturer</th>
             <th>Price</th>
             <th>Operations</th>
         </tr>
@@ -25,9 +26,10 @@
             </c:url>
 
             <tr>
-                <td style="width: 25%">${detail.title}</td>
-                <td style="width: 25%; text-align: center">${detail.price}</td>
-                <td style="width: 50%; text-align: center">
+                <td style="width: 20%">${detail.title}</td>
+                <td style="width: 20%; text-align: center">${detail.manufacturerTitle}</td>
+                <td style="width: 20%; text-align: center">${detail.price}</td>
+                <td style="width: 40%; text-align: center">
                     <input type="button" value="Update" style="width: 49%"
                            onclick="window.location.href = '${addButton}'"/>
                     <input type="button" value="Delete" style="width: 49%"

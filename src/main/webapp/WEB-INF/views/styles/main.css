@@ -19,6 +19,22 @@
     color: white;
 }
 
+#manufacturersTable {
+    width: 100%;
+}
+
+#manufacturersTable td, #manufacturersTable th {
+    border: 1px solid #ddd;
+}
+
+#manufacturersTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: lightgreen;
+    color: white;
+}
+
 #addButton {
     width: 25%;
     float: initial;
@@ -34,6 +50,10 @@
     float: initial;
 }
 #bucketButton {
+    width: 100%;
+    float: initial;
+}
+#manufacturersButton {
     width: 100%;
     float: initial;
 }
