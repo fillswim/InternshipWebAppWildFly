@@ -3,7 +3,44 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="1.0.0" author="oleg.filatov">
+    <changeSet id="1.0.1" author="oleg.filatov">
+        <createTable tableName="manufacturers">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="address" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="oleg.filatov">
+
+        <insert tableName="manufacturers">
+            <column name="title" value="Microsoft"/>
+            <column name="address" value="One Microsoft Way Redmond, WA 98052-6399 USA"/>
+        </insert>
+
+        <insert tableName="manufacturers">
+            <column name="title" value="Nintendo"/>
+            <column name="address" value="11-1 Hokotate-cho, Kamitoba, Minami-ku, Kyoto 601-8501, Japan."/>
+        </insert>
+
+        <insert tableName="manufacturers">
+            <column name="title" value="Apple"/>
+            <column name="address" value="1 Infinite Loop, Cupertino, California."/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="1.0.3" author="oleg.filatov">
         <createTable tableName="products">
 
             <column name="id" type="int" autoIncrement="true">
@@ -18,31 +55,74 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="manufacturer_id" type="int"/>
+
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.1" author="oleg.filatov">
+    <changeSet id="1.0.4" author="oleg.filatov">
+        <addForeignKeyConstraint baseTableName="products"
+                                 baseColumnNames="manufacturer_id"
+                                 constraintName="fk_products_manufacturer"
+                                 referencedTableName="manufacturers"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="oleg.filatov">
+
+        <insert tableName="products">
+            <column name="title" value="Xbox Series X"/>
+            <column name="price" value="1500"/>
+            <column name="manufacturer_id" value="1"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="title" value="Nintendo switch"/>
+            <column name="price" value="1000"/>
+            <column name="manufacturer_id" value="2"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="title" value="Iphone 12"/>
+            <column name="price" value="2000"/>
+            <column name="manufacturer_id" value="3"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="1.0.6" author="oleg.filatov">
         <createTable tableName="bucket_details">
 
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="product_id" type="int"></column>
-            <column name="amount" type="int"></column>
+            <column name="product_id" type="int"/>
+
+            <column name="amount" type="int"/>
 
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.2" author="oleg.filatov">
+    <changeSet id="1.0.7" author="oleg.filatov">
         <addForeignKeyConstraint baseTableName="bucket_details"
                                  baseColumnNames="product_id"
                                  constraintName="fk_bucket_details_products"
                                  referencedTableName="products"
                                  referencedColumnNames="id"/>
     </changeSet>
-    
-    <changeSet id="1.0.3" author="oleg.filatov">
+
+    <changeSet id="1.0.8" author="oleg.filatov">
+        <insert tableName="bucket_details">
+
+            <column name="product_id" value="1"/>
+
+            <column name="amount" value="3"/>
+
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="oleg.filatov">
         <createTable tableName="information">
 
             <column name="id" type="int" autoIncrement="true">
@@ -63,35 +143,16 @@
 
         </createTable>
     </changeSet>
-    
 
-    <changeSet id="1.0.4" author="oleg.filatov">
-        <insert tableName="products">
-            <column name="title" value="Xbox"/>
-            <column name="price" value="1500"/>
-        </insert>
-        <insert tableName="products">
-            <column name="title" value="Nintendo"/>
-            <column name="price" value="1000"/>
-        </insert>
-        <insert tableName="products">
-            <column name="title" value="Iphone"/>
-            <column name="price" value="2000"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="1.0.5" author="oleg.filatov">
-        <insert tableName="bucket_details">
-            <column name="product_id" value="1"/>
-            <column name="amount" value="3"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="1.0.6" author="oleg.filatov">
+    <changeSet id="1.0.10" author="oleg.filatov">
         <insert tableName="information">
+
             <column name="name" value="MySite.com"/>
+
             <column name="period" value="2010-2022"/>
+
             <column name="copyright" value="@Copyright"/>
+
         </insert>
     </changeSet>
 
