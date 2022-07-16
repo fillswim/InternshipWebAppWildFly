@@ -1,12 +1,13 @@
 package org.example.controller;
 
-import org.example.models.Info;
-import org.example.models.Manufacturer;
+import org.example.dto.InfoDTO;
+import org.example.dto.ManufacturerDTO;
 import org.example.service.InfoService;
 import org.example.service.ManufacturerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -23,46 +24,16 @@ public class ManufacturerController {
         this.manufacturerService = manufacturerService;
     }
 
-    private String getHeader() {
-        return infoService.getAllInfo().get(0).getName();
-    }
-
-    private String getFooter() {
-
-        List<Info> infos = infoService.getAllInfo();
-        Info info = infos.get(0);
-
-        return info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
-    }
-
     @GetMapping
     public String showAllManufacturers(Model model) {
 
-        List<Manufacturer> manufacturers = manufacturerService.getAllManufacturer();
-        model.addAttribute("manufacturers", manufacturers);
+        List<ManufacturerDTO> manufacturerDTOS = manufacturerService.getAllManufacturerDTOS();
+        model.addAttribute("manufacturers", manufacturerDTOS);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "manufacturers";
-    }
-
-//    @PostMapping("/addManufacturer")
-//    public String addManufacturer(@ModelAttribute("manufacturer") Manufacturer manufacturer) {
-//
-//        System.out.println(manufacturer);
-//
-//        return "redirect:/manufacturers";
-//    }
-
-    @GetMapping("/addManufacturer")
-    public String addManufacturer(@RequestParam("manufacturer") int manufacturerId) {
-
-        System.out.println(manufacturerId);
-
-        return "redirect:/manufacturers";
     }
 
 }
