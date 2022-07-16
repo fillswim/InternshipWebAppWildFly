@@ -3,7 +3,7 @@
 <div>
 
     <div style="float: left">
-        <h2>${mytitle}</h2>
+        <h2>${infoDTO.header}</h2>
     </div>
 
 </div>
