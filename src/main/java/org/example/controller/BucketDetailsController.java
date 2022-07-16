@@ -1,9 +1,8 @@
 package org.example.controller;
 
 import org.example.dto.BucketDetailsDTO;
+import org.example.dto.InfoDTO;
 import org.example.mappers.BucketDetailsMapper;
-import org.example.models.BucketDetails;
-import org.example.models.Info;
 import org.example.service.BucketDetailsService;
 import org.example.service.InfoService;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bucketdetails")
@@ -31,33 +29,14 @@ public class BucketDetailsController {
         this.bucketDetailsMapper = bucketDetailsMapper;
     }
 
-    private String getHeader() {
-        return infoService.getAllInfo().get(0).getName();
-    }
-
-    private String getFooter() {
-
-        List<Info> infos = infoService.getAllInfo();
-        Info info = infos.get(0);
-
-        return info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
-    }
-
     @GetMapping
     public String showAllBucketDetails(Model model) {
 
-        List<BucketDetails> allBucketDetails = bucketDetailsService.findAllBucketDetails();
-
-        List<BucketDetailsDTO> bucketDetailsDTOS = allBucketDetails.stream()
-                .map(bucketDetailsMapper::mapToBucketDetailsDTO)
-                .collect(Collectors.toList());
-
+        List<BucketDetailsDTO> bucketDetailsDTOS = bucketDetailsService.findAllBucketDetailsDTOS();
         model.addAttribute("bucketDetails", bucketDetailsDTOS);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "bucketdetails";
     }
