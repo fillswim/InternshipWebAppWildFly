@@ -1,10 +1,11 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.dto.InfoDTO;
+import org.example.dto.ManufacturerDTO;
 import org.example.dto.ProductDTO;
 import org.example.mappers.ProductMapper;
 import org.example.models.BucketDetails;
-import org.example.models.Info;
 import org.example.models.Manufacturer;
 import org.example.models.Product;
 import org.example.service.BucketDetailsService;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -50,34 +50,14 @@ public class ProductController {
         this.manufacturerService = manufacturerService;
     }
 
-    private String getHeader() {
-        return infoService.getAllInfo().get(0).getName();
-    }
-
-    private String getFooter() {
-
-        List<Info> infos = infoService.getAllInfo();
-        Info info = infos.get(0);
-
-        return info.getCopyright() + " " + info.getPeriod() + " " + info.getName();
-    }
-
-
     @GetMapping()
     public String showAllProducts(Model model) {
 
-        List<Product> products = productService.getAllProducts();
-
-        List<ProductDTO> productDTOS = products.stream()
-                .map(productMapper::mapToProductDto)
-                .collect(Collectors.toList());
-
+        List<ProductDTO> productDTOS = productService.getAllProductsDTOS();
         model.addAttribute("products", productDTOS);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "products-All-for-Customers";
     }
@@ -85,23 +65,14 @@ public class ProductController {
     @GetMapping("/edit")
     public String showAllProductsForAdmins(Model model) {
 
-        List<Product> products = productService.getAllProducts();
-
-        List<ProductDTO> productDTOS = products.stream()
-                .map(productMapper::mapToProductDto)
-                .collect(Collectors.toList());
-
+        List<ProductDTO> productDTOS = productService.getAllProductsDTOS();
         model.addAttribute("products", productDTOS);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "products-All-for-Admins";
     }
-
-
 
     @GetMapping("/addNewProduct")
     public String addNewProduct(Model model) {
@@ -109,10 +80,8 @@ public class ProductController {
         ProductDTO productDTO = new ProductDTO();
         model.addAttribute("product", productDTO);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "product-Details";
 
@@ -147,17 +116,14 @@ public class ProductController {
     public String updateProduct(@RequestParam("productId") int productId,
                                 Model model) {
 
-        Product product = productService.getProductById(productId);
-        ProductDTO productDTO = productMapper.mapToProductDto(product);
+        ProductDTO productDTO = productService.getProductDTOById(productId);
         model.addAttribute("product", productDTO);
 
-        List<Manufacturer> manufacturers = manufacturerService.getAllManufacturer();
-        model.addAttribute("manufacturers", manufacturers);
+        List<ManufacturerDTO> manufacturerDTOS = manufacturerService.getAllManufacturerDTOS();
+        model.addAttribute("manufacturers", manufacturerDTOS);
 
-        String header = getHeader();
-        String footer = getFooter();
-        model.addAttribute("mytitle", header);
-        model.addAttribute("myfooter", footer);
+        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+        model.addAttribute("infoDTO", infoDTO);
 
         return "product-Details";
     }
