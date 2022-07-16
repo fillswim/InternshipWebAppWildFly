@@ -1,10 +1,9 @@
 package org.example.service;
 
-import org.example.models.Info;
-
-import java.util.List;
+import org.example.dto.InfoDTO;
 
 public interface InfoService {
 
-    List<Info> getAllInfo();
+    InfoDTO getInfoDTOBuId(int infoId);
+
 }
