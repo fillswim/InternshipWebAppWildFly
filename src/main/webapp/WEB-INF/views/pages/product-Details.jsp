@@ -12,23 +12,28 @@
 
     <form:hidden path="id"/>
 
-    Title <form:input path="title"/>
-    <br>
+    <table id="productEditTable">
+        <tr>
+            <td>Title</td>
+            <td><form:input path="title" id="titleField"/></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><form:input path="price" id="priceField"/></td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td><form:select path="manufacturerId" id="manufacturerField">
+                <form:option value="0">--SELECT--</form:option>
+                <form:options items="${manufacturers}" itemValue="id" itemLabel="title"></form:options>
+            </form:select></td>
+        </tr>
+
+    </table>
+
     <br>
 
-    Price <form:input path="price"/>
-    <br>
-    <br>
-
-    Manufacturer
-    <form:select path="manufacturerId">
-        <form:option value="0">--SELECT--</form:option>
-        <form:options items="${manufacturers}" itemValue="id" itemLabel="title"></form:options>
-    </form:select>
-    <br>
-    <br>
-
-    <input type="submit" value="OK">
+    <input type="submit" id="saveProductsButton" value="OK">
 
 </form:form>
 

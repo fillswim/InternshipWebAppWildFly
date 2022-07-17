@@ -7,6 +7,18 @@
     width: 100%;
 }
 
+#manufacturersTable {
+    width: 100%;
+}
+
+#productEditTable {
+    width: 40%;
+}
+
+#productEditTable td {
+    width: 50%;
+}
+
 #productsTable td, #productsTable th {
     border: 1px solid #ddd;
 }
@@ -19,11 +31,11 @@
     color: white;
 }
 
-#manufacturersTable {
-    width: 100%;
+#manufacturersTable td, #manufacturersTable th {
+    border: 1px solid #ddd;
 }
 
-#manufacturersTable td, #manufacturersTable th {
+#productEditTable td {
     border: 1px solid #ddd;
 }
 
@@ -35,8 +47,13 @@
     color: white;
 }
 
-#addButton {
-    width: 25%;
+#titleField, #priceField, #manufacturerField {
+    width: 100%;
+    text-align: center;
+}
+
+#addButton, #saveProductsButton{
+    width: 20%;
     float: initial;
 }
 
@@ -49,10 +66,12 @@
     width: 100%;
     float: initial;
 }
+
 #bucketButton {
     width: 100%;
     float: initial;
 }
+
 #manufacturersButton {
     width: 100%;
     float: initial;
