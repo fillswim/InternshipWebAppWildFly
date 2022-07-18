@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div style="padding: 5px;">
 
     <h3>All products for customers</h3>
@@ -14,6 +15,7 @@
         </thead>
 
         <tbody>
+
         <c:forEach var="detail" items="${products}">
 
             <c:url var="addButton" value="/addProductToBucket">

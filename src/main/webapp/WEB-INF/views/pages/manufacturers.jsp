@@ -15,12 +15,12 @@
     </thead>
 
     <tbody>
-    <c:forEach var="manufacturer" items="${manufacturers}">
+    <c:forEach var="user" items="${manufacturers}">
 
       <tr>
-        <td style="width: 10%; text-align: center">${manufacturer.id}</td>
-        <td style="width: 45%; text-align: center">${manufacturer.title}</td>
-        <td style="width: 45%; text-align: center">${manufacturer.address}</td>
+        <td style="width: 10%; text-align: center">${user.id}</td>
+        <td style="width: 45%; text-align: center">${user.title}</td>
+        <td style="width: 45%; text-align: center">${user.address}</td>
       </tr>
 
     </c:forEach>

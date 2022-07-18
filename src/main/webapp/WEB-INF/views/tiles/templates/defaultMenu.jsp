@@ -23,4 +23,10 @@
     <input id="editProductsButton" type="button" value="Edit products"
            onclick="window.location.href='/test/app01/edit'">
 
+    <br>
+    <br>
+
+    <input id="usersButton" type="button" value="All users"
+           onclick="window.location.href='/test/app01/users'">
+
 </div>

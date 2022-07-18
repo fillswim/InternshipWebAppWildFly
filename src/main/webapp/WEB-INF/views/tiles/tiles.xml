@@ -37,9 +37,22 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/bucketdetails.jsp" />
     </definition>
 
+    <!--All manufacturers-->
     <definition name="manufacturers" extends="template-def">
         <put-attribute name="title" value="Manufacturers" />
         <put-attribute name="body" value="/WEB-INF/views/pages/manufacturers.jsp" />
+    </definition>
+
+    <!--All users-->
+    <definition name="users" extends="template-def">
+        <put-attribute name="title" value="Users" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/users.jsp" />
+    </definition>
+
+    <!--Login page-->
+    <definition name="login" extends="template-def">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
     </definition>
 
 </tiles-definitions>

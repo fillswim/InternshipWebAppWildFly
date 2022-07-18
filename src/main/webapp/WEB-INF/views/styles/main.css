@@ -3,11 +3,7 @@
     height: 100%;
 }
 
-#productsTable {
-    width: 100%;
-}
-
-#manufacturersTable {
+#productsTable, #manufacturersTable, #usersTable {
     width: 100%;
 }
 
@@ -19,27 +15,15 @@
     width: 50%;
 }
 
-#productsTable td, #productsTable th {
-    border: 1px solid #ddd;
-}
-
-#productsTable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: lightgreen;
-    color: white;
-}
-
-#manufacturersTable td, #manufacturersTable th {
-    border: 1px solid #ddd;
-}
-
+#productsTable td, #productsTable th,
+#manufacturersTable td, #manufacturersTable th,
+#usersTable td, #usersTable th,
 #productEditTable td {
     border: 1px solid #ddd;
 }
 
-#manufacturersTable th {
+#productsTable th, #manufacturersTable th,
+#usersTable th, #usersTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -47,32 +31,15 @@
     color: white;
 }
 
-#titleField, #priceField, #manufacturerField {
+#titleField, #priceField,
+#manufacturerField, #manufacturersButton,
+#editProductsButton, #returnToAllProductsButton, #bucketButton,
+#usersButton {
     width: 100%;
     text-align: center;
 }
 
 #addButton, #saveProductsButton{
     width: 20%;
-    float: initial;
-}
-
-#editProductsButton {
-    width: 100%;
-    float: initial;
-}
-
-#returnToAllProductsButton {
-    width: 100%;
-    float: initial;
-}
-
-#bucketButton {
-    width: 100%;
-    float: initial;
-}
-
-#manufacturersButton {
-    width: 100%;
     float: initial;
 }
