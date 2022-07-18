@@ -130,7 +130,7 @@
             </column>
 
             <column name="name" type="varchar(25)">
-                <constraints nullable="true" unique="true"/>
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="period" type="varchar(25)">
@@ -154,6 +154,48 @@
             <column name="copyright" value="@Copyright"/>
 
         </insert>
+    </changeSet>
+
+    <changeSet id="1.0.11" author="oleg.filatov">
+        <createTable tableName="users">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="username" type="varchar(25)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="email" type="varchar(25)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="role" type="varchar(25)"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.12" author="oleg.filatov">
+
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@mail.ru"/>
+            <column name="password" value="$2a$10$GUszNhLQdSZX2fHbiXJ2guiXas3yz3Ao1UanyF0J2XdZH0yK/vhvi"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="username" value="user"/>
+            <column name="email" value="user@mail.ru"/>
+            <column name="password" value="$2a$10$aDasVZzqv/gYl.TyB7tkFOJl5uDKQqiS6xXiLQSS7LzuujT/ZR7Ke"/>
+            <column name="role" value="CLIENT"/>
+        </insert>
+
     </changeSet>
 
 </databaseChangeLog>
