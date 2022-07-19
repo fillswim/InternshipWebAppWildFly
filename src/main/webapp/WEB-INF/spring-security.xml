@@ -1,6 +1,7 @@
 <b:beans xmlns="http://www.springframework.org/schema/security"
          xmlns:b="http://www.springframework.org/schema/beans"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:security="http://www.springframework.org/schema/security"
          xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
@@ -14,17 +15,41 @@
                 username-parameter="username"
                 password-parameter="password"/>
 
-        <logout logout-success-url="/login?logout"/>
+        <logout logout-success-url="/" delete-cookies="JSESSIONID"/>
 
         <csrf/>
     </http>
 
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+    <b:bean id="bCryptPasswordEncoder"
+            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+<!--    <b:bean id="userDAO" class="org.example.dao.UserDAOImpl">-->
+<!--    </b:bean>-->
+
+    <b:bean id="service" class="org.example.service.UserServiceImpl">
+<!--        <b:property ref="userDAO" name="userDAO"/>-->
+<!--        <b:constructor-arg ref="userDAO"/>-->
+    </b:bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="service">
+            <security:password-encoder ref="bCryptPasswordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+<!--    <authentication-manager>-->
+<!--        <authentication-provider user-service-ref="service">-->
+<!--            <password-encoder ref="bCryptPasswordEncoder"/>-->
+<!--        </authentication-provider>-->
+<!--    </authentication-manager>-->
+
+
+<!--    <authentication-manager>-->
+<!--        <authentication-provider>-->
+<!--            <user-service>-->
+<!--                <user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>-->
+<!--            </user-service>-->
+<!--        </authentication-provider>-->
+<!--    </authentication-manager>-->
 
 </b:beans>
