@@ -1,21 +1,28 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div>
 
     <div style="float: right">
-        <input id="loginButton" type="button" value="Login"
-               onclick="window.location.href='/test/app01/login'">
-
-    </div>
-
-    <sec:authentication property="principal.username" />
-
-    <div style="float: right">
         <sec:authorize access="!isAuthenticated()">
-            Login
+
+            <div style="float: right">
+                <form:form action="${pageContext.request.contextPath}/login" method="GET">
+                    <input type="submit" value="Log in" />
+                </form:form>
+            </div>
+
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            Logout
+
+            <h2>Welcome: ${pageContext.request.userPrincipal.name}</h2>
+
+            <div style="float: right">
+                <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                    <input type="submit" value="Logout" />
+                </form:form>
+            </div>
+
         </sec:authorize>
     </div>
 
