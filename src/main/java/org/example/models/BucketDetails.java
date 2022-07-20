@@ -24,4 +24,8 @@ public class BucketDetails {
 
     private int amount;
 
+    @ManyToOne
+    @JoinColumn(name = "bucket_id")
+    Bucket bucket;
+
 }
