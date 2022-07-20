@@ -4,7 +4,6 @@ import org.example.dto.InfoDTO;
 import org.example.dto.UserDTO;
 import org.example.service.InfoService;
 import org.example.service.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
