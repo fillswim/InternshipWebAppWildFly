@@ -3,31 +3,44 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div>
 
-    <div style="float: right">
-        <sec:authorize access="!isAuthenticated()">
+    <table id="headerTable">
+        <tr>
+            <td>
+                <div style="float: left">
+                    <h2>${infoDTO.header}</h2>
+                </div>
+            </td>
 
-            <div style="float: right">
-                <form:form action="${pageContext.request.contextPath}/login" method="GET">
-                    <input type="submit" value="Log in" />
-                </form:form>
-            </div>
+            <td>
+                <div style="float: right">
+                    <sec:authorize access="!isAuthenticated()">
 
-        </sec:authorize>
-        <sec:authorize access="isAuthenticated()">
+                        <h3 style="text-align: center">Unknown user</h3>
 
-            <h2>Welcome: ${pageContext.request.userPrincipal.name}</h2>
+                        <div style="float: right">
+                            <form:form action="${pageContext.request.contextPath}/login" method="GET">
+                                <input id="loginButton" type="submit" value="Log in" />
+                            </form:form>
+                        </div>
 
-            <div style="float: right">
-                <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                    <input type="submit" value="Logout" />
-                </form:form>
-            </div>
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
 
-        </sec:authorize>
-    </div>
+                        <h3 style="text-align: center">${pageContext.request.userPrincipal.name}</h3>
 
-    <div style="float: left">
-        <h2>${infoDTO.header}</h2>
-    </div>
+                        <div style="float: right">
+                            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input id="logoutButton" type="submit" value="Logout" />
+                            </form:form>
+                        </div>
+
+                    </sec:authorize>
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
 
 </div>

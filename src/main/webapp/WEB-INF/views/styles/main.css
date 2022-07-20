@@ -3,7 +3,7 @@
     height: 100%;
 }
 
-#productsTable, #manufacturersTable, #usersTable {
+#productsTable, #manufacturersTable, #usersTable, #headerTable {
     width: 100%;
 }
 
@@ -42,4 +42,8 @@
 #addButton, #saveProductsButton{
     width: 20%;
     float: initial;
+}
+
+#loginButton, #logoutButton {
+    width: 125px;
 }
