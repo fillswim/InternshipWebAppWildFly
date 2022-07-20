@@ -2,9 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div style="padding: 5px;">
+<div id="login-box" style="padding: 5px;">
 
     <h3>Log in as:</h3>
+
+    <c:if test="${not empty error}">
+        <div class="error">${error}</div>
+    </c:if>
+    <c:if test="${not empty msg}">
+        <div class="msg">${msg}</div>
+    </c:if>
+
 
     <form name='loginForm'
           action="<c:url value='/login' />" method='POST'>
@@ -28,26 +36,6 @@
                value="${_csrf.token}" />
 
     </form>
-
-<%--    <form:form action="/test/app01/auth" modelAttribute="loginUser">--%>
-
-<%--        <table id="loginTable">--%>
-<%--            <tr>--%>
-<%--                <td>Username</td>--%>
-<%--                <td><form:input path="username" id="usernameField"/></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Password</td>--%>
-<%--                <td><form:input path="password" id="passwordField"/></td>--%>
-<%--            </tr>--%>
-
-<%--        </table>--%>
-
-<%--        <br>--%>
-
-<%--        <input type="submit" id="loginButton" value="Log in">--%>
-
-<%--    </form:form>--%>
 
 </div>
 
