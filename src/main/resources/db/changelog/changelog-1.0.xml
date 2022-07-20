@@ -101,62 +101,41 @@
 
             <column name="amount" type="int"/>
 
+            <column name="bucket_id" type="int"/>
+
         </createTable>
     </changeSet>
 
     <changeSet id="1.0.7" author="oleg.filatov">
+        <createTable tableName="buckets">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="bucketStatus" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="int"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="oleg.filatov">
         <addForeignKeyConstraint baseTableName="bucket_details"
                                  baseColumnNames="product_id"
                                  constraintName="fk_bucket_details_products"
                                  referencedTableName="products"
                                  referencedColumnNames="id"/>
-    </changeSet>
 
-    <changeSet id="1.0.8" author="oleg.filatov">
-        <insert tableName="bucket_details">
-
-            <column name="product_id" value="1"/>
-
-            <column name="amount" value="3"/>
-
-        </insert>
+        <addForeignKeyConstraint baseTableName="bucket_details"
+                                 baseColumnNames="bucket_id"
+                                 constraintName="fk_bucket_details_buckets"
+                                 referencedTableName="buckets"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="1.0.9" author="oleg.filatov">
-        <createTable tableName="information">
-
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="name" type="varchar(25)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-
-            <column name="period" type="varchar(25)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="copyright" type="varchar(25)">
-                <constraints nullable="false"/>
-            </column>
-
-        </createTable>
-    </changeSet>
-
-    <changeSet id="1.0.10" author="oleg.filatov">
-        <insert tableName="information">
-
-            <column name="name" value="MySite.com"/>
-
-            <column name="period" value="2010-2022"/>
-
-            <column name="copyright" value="@Copyright"/>
-
-        </insert>
-    </changeSet>
-
-    <changeSet id="1.0.11" author="oleg.filatov">
         <createTable tableName="users">
 
             <column name="id" type="int" autoIncrement="true">
@@ -180,7 +159,15 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.12" author="oleg.filatov">
+    <changeSet id="1.0.10" author="oleg.filatov">
+        <addForeignKeyConstraint baseTableName="buckets"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_bucket_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.11" author="oleg.filatov">
 
         <insert tableName="users">
             <column name="username" value="admin"/>
@@ -196,6 +183,40 @@
             <column name="role" value="ROLE_CLIENT"/>
         </insert>
 
+    </changeSet>
+
+    <changeSet id="1.0.12" author="oleg.filatov">
+        <createTable tableName="information">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(25)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="period" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="copyright" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.13" author="oleg.filatov">
+        <insert tableName="information">
+
+            <column name="name" value="MySite.com"/>
+
+            <column name="period" value="2010-2022"/>
+
+            <column name="copyright" value="@Copyright"/>
+
+        </insert>
     </changeSet>
 
 </databaseChangeLog>
