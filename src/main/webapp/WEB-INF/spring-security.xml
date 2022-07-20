@@ -15,7 +15,7 @@
                 username-parameter="username"
                 password-parameter="password"/>
 
-        <logout logout-success-url="/" delete-cookies="JSESSIONID"/>
+        <logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true"/>
 
         <csrf/>
     </http>
@@ -23,33 +23,10 @@
     <b:bean id="bCryptPasswordEncoder"
             class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-<!--    <b:bean id="userDAO" class="org.example.dao.UserDAOImpl">-->
-<!--    </b:bean>-->
-
-    <b:bean id="service" class="org.example.service.UserServiceImpl">
-<!--        <b:property ref="userDAO" name="userDAO"/>-->
-<!--        <b:constructor-arg ref="userDAO"/>-->
-    </b:bean>
-
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="service">
+        <security:authentication-provider user-service-ref="userServiceImpl">
             <security:password-encoder ref="bCryptPasswordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
-
-<!--    <authentication-manager>-->
-<!--        <authentication-provider user-service-ref="service">-->
-<!--            <password-encoder ref="bCryptPasswordEncoder"/>-->
-<!--        </authentication-provider>-->
-<!--    </authentication-manager>-->
-
-
-<!--    <authentication-manager>-->
-<!--        <authentication-provider>-->
-<!--            <user-service>-->
-<!--                <user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>-->
-<!--            </user-service>-->
-<!--        </authentication-provider>-->
-<!--    </authentication-manager>-->
 
 </b:beans>
