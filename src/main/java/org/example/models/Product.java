@@ -22,7 +22,9 @@ public class Product {
 
     private Double price;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne(
+            mappedBy = "product",
+            cascade = CascadeType.ALL)
     @ToString.Exclude
     private BucketDetails bucketDetails;
 
