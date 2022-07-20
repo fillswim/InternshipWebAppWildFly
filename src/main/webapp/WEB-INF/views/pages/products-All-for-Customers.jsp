@@ -30,10 +30,16 @@
                 <td style="width: 25%">${detail.title}</td>
                 <td style="width: 25%; text-align: center">${detail.price}</td>
                 <td style="width: 50%; text-align: center">
-                    <input type="button" value="Add to bucket" style="width: 49%"
-                           onclick="window.location.href = '${addButton}'"/>
-                    <input type="button" value="Delete from bucket" style="width: 49%"
-                           onclick="window.location.href = '${deleteButton}'"/>
+
+                    <sec:authorize access="isAuthenticated()">
+
+                        <input type="button" value="Add to bucket" style="width: 49%"
+                               onclick="window.location.href = '${addButton}'"/>
+                        <input type="button" value="Delete from bucket" style="width: 49%"
+                               onclick="window.location.href = '${deleteButton}'"/>
+
+                    </sec:authorize>
+
                 </td>
             </tr>
 
