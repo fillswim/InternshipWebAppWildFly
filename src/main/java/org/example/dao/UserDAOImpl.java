@@ -1,6 +1,5 @@
 package org.example.dao;
 
-import org.example.models.Product;
 import org.example.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
