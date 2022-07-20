@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -158,7 +159,7 @@ public class ProductController {
     }
 
     @GetMapping("/addProductToBucket")
-    public String addProductToBucket(@RequestParam("productId") int productId) {
+    public String addProductToBucket(@RequestParam("productId") int productId, Principal principal) {
 
         Product product = productService.getProductById(productId);
         BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProduct(product);
