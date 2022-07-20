@@ -186,14 +186,14 @@
             <column name="username" value="admin"/>
             <column name="email" value="admin@mail.ru"/>
             <column name="password" value="$2a$10$GUszNhLQdSZX2fHbiXJ2guiXas3yz3Ao1UanyF0J2XdZH0yK/vhvi"/>
-            <column name="role" value="ADMIN"/>
+            <column name="role" value="ROLE_ADMIN"/>
         </insert>
 
         <insert tableName="users">
             <column name="username" value="user"/>
             <column name="email" value="user@mail.ru"/>
             <column name="password" value="$2a$10$aDasVZzqv/gYl.TyB7tkFOJl5uDKQqiS6xXiLQSS7LzuujT/ZR7Ke"/>
-            <column name="role" value="CLIENT"/>
+            <column name="role" value="ROLE_CLIENT"/>
         </insert>
 
     </changeSet>
