@@ -5,7 +5,7 @@
 
   <display-name>SpringMVCApacheTiles</display-name>
 
-  <!-- this is the dispatchterservlet -->
+  <!-- Spring MVC -->
   <servlet>
     <servlet-name>apachetiles</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -20,12 +20,15 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
-  <!--Security-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/spring-security.xml</param-value>
+    <param-value>
+      /WEB-INF/spring-security.xml
+      /WEB-INF/apachetiles-servlet.xml
+    </param-value>
   </context-param>
 
+  <!-- Spring Security -->
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
