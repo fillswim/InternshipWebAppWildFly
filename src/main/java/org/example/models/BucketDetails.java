@@ -1,6 +1,8 @@
 package org.example.models;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 
@@ -18,13 +20,15 @@ public class BucketDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(orphanRemoval = true)
+    private int amount;
+
+    @ToString.Exclude
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private int amount;
-
     @ManyToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "bucket_id")
     Bucket bucket;
 

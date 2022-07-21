@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.dto.BucketDetailsDTO;
 import org.example.dto.InfoDTO;
 import org.example.mappers.BucketDetailsMapper;
+import org.example.models.BucketStatus;
 import org.example.service.BucketDetailsService;
 import org.example.service.InfoService;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,15 +32,25 @@ public class BucketDetailsController {
     }
 
     @GetMapping
-    public String showAllBucketDetails(Model model) {
+    public String showCurrentBucketForUser(Model model, Principal principal) {
 
-        List<BucketDetailsDTO> bucketDetailsDTOS = bucketDetailsService.findAllBucketDetailsDTOS();
-        model.addAttribute("bucketDetails", bucketDetailsDTOS);
+        if (principal != null) {
 
-        InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
-        model.addAttribute("infoDTO", infoDTO);
+            String username = principal.getName();
 
-        return "bucketdetails";
+            List<BucketDetailsDTO> bucketDetailsDTOS =
+                    bucketDetailsService.findAllBucketDetailsForUserDTOS(username, BucketStatus.CURRENT);
+            model.addAttribute("bucketDetails", bucketDetailsDTOS);
+
+            InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
+            model.addAttribute("infoDTO", infoDTO);
+
+            return "bucket";
+        } else {
+
+            return "login";
+        }
+
     }
 
 }
