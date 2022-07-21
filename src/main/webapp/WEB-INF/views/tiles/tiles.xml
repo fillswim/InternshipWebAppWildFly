@@ -31,10 +31,10 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/product-Details.jsp" />
     </definition>
 
-    <!--All bucket details-->
-    <definition name="bucketdetails" extends="template-def">
+    <!--Show current bucket-->
+    <definition name="bucket" extends="template-def">
         <put-attribute name="title" value="Bucket" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/bucketdetails.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/bucket.jsp" />
     </definition>
 
     <!--All manufacturers-->
