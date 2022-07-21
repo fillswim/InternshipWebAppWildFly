@@ -1,6 +1,7 @@
 package org.example.models;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,12 +28,11 @@ public class Bucket {
     private User user;
 
     @OneToMany(
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "bucket",
             cascade= CascadeType.ALL,
             orphanRemoval = true)
     @ToString.Exclude
     private List<BucketDetails> bucketDetailsList;
-
 
 }
