@@ -17,4 +17,8 @@ public interface ProductService {
 
     void deleteProduct(Product product);
 
+    void addProductToBucket(int productId, String username);
+
+    void deleteProductFromBucket(int productId, String username);
+
 }
