@@ -3,6 +3,7 @@ package org.example.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,11 +23,11 @@ public class Product {
 
     private Double price;
 
-    @OneToOne(
+    @OneToMany(
             mappedBy = "product",
             cascade = CascadeType.ALL)
     @ToString.Exclude
-    private BucketDetails bucketDetails;
+    private List<BucketDetails> bucketDetails;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
