@@ -23,7 +23,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserDAO userDAO, UserMapper userMapper) {
+    public UserServiceImpl(UserDAO userDAO,
+                           UserMapper userMapper) {
         this.userDAO = userDAO;
         this.userMapper = userMapper;
     }
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService {
         return userDAO.showAllUsers().stream()
                 .map(userMapper::mapToUserDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userDAO.loadUserByUsername(username);
     }
 
     @Override

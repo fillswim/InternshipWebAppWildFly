@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
 
     List<UserDTO> getAllUserDTOS();
 
+    User findUserByUsername(String username);
+
 }
