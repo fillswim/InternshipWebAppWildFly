@@ -5,7 +5,6 @@ import org.example.dto.InfoDTO;
 import org.example.dto.ManufacturerDTO;
 import org.example.dto.ProductDTO;
 import org.example.mappers.ProductMapper;
-import org.example.models.BucketDetails;
 import org.example.models.Manufacturer;
 import org.example.models.Product;
 import org.example.service.BucketDetailsService;
@@ -159,51 +158,21 @@ public class ProductController {
     }
 
     @GetMapping("/addProductToBucket")
-    public String addProductToBucket(@RequestParam("productId") int productId, Principal principal) {
+    public String addProductToBucket(@RequestParam("productId") int productId,
+                                     Principal principal) {
 
-        Product product = productService.getProductById(productId);
-        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProduct(product);
-
-        if (bucketDetails != null) {
-
-            int amount = bucketDetails.getAmount();
-            bucketDetails.setAmount(++amount);
-
-            bucketDetailsService.saveBucketDetails(bucketDetails);
-        } else {
-
-            Product newProduct = productService.getProductById(productId);
-
-            BucketDetails newBucketDetails = BucketDetails.builder()
-                    .product(newProduct)
-                    .amount(1)
-                    .build();
-
-            bucketDetailsService.saveBucketDetails(newBucketDetails);
-        }
+        String username = principal.getName();
+        productService.addProductToBucket(productId, username);
 
         return "redirect:/";
     }
 
     @GetMapping("/deleteProductFromBucket")
-    public String deleteProductFromBucket(@RequestParam("productId") int productId) {
+    public String deleteProductFromBucket(@RequestParam("productId") int productId,
+                                          Principal principal) {
 
-        Product product = productService.getProductById(productId);
-        BucketDetails bucketDetails = bucketDetailsService.getBucketDetailsByProduct(product);
-
-        if (bucketDetails != null) {
-
-            int amount = bucketDetails.getAmount();
-            int newAmount = --amount;
-
-            if (newAmount < 1) {
-                bucketDetailsService.deleteBucketDetailsById(bucketDetails.getId());
-            } else {
-                bucketDetails.setAmount(newAmount);
-
-                bucketDetailsService.saveBucketDetails(bucketDetails);
-            }
-        }
+        String username = principal.getName();
+        productService.deleteProductFromBucket(productId, username);
 
         return "redirect:/";
     }
