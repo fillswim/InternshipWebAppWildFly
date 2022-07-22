@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,7 +25,7 @@ public class BucketDAOImpl implements BucketDAO {
     }
 
     @Override
-    public Optional<Bucket> findBucketByUserAndStatus(User user, BucketStatus bucketStatus) {
+    public List<Bucket> findBucketsByUserAndStatus(User user, BucketStatus bucketStatus) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -41,15 +42,8 @@ public class BucketDAOImpl implements BucketDAO {
 
         Query<Bucket> query = session.createQuery(criteriaQuery);
 
-        Bucket bucket;
+        return query.getResultList();
 
-        try {
-            bucket = query.getSingleResult();
-        } catch (Exception e) {
-            bucket = null;
-        }
-
-        return Optional.ofNullable(bucket);
     }
 
     @Override
@@ -58,6 +52,22 @@ public class BucketDAOImpl implements BucketDAO {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(bucket);
 
+    }
+
+    @Override
+    public Optional<Bucket> findBucketById(int bucketId) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Bucket> criteriaQuery = criteriaBuilder.createQuery(Bucket.class);
+
+        Root<Bucket> root = criteriaQuery.from(Bucket.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), bucketId));
+
+        Query<Bucket> query = session.createQuery(criteriaQuery);
+
+        return Optional.ofNullable(query.getSingleResult());
     }
 
 }
