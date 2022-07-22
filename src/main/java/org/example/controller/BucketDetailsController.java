@@ -31,26 +31,4 @@ public class BucketDetailsController {
         this.bucketDetailsMapper = bucketDetailsMapper;
     }
 
-    @GetMapping
-    public String showCurrentBucketForUser(Model model, Principal principal) {
-
-        if (principal != null) {
-
-            String username = principal.getName();
-
-            List<BucketDetailsDTO> bucketDetailsDTOS =
-                    bucketDetailsService.findAllBucketDetailsForUserDTOS(username, BucketStatus.CURRENT);
-            model.addAttribute("bucketDetails", bucketDetailsDTOS);
-
-            InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
-            model.addAttribute("infoDTO", infoDTO);
-
-            return "bucket";
-        } else {
-
-            return "login";
-        }
-
-    }
-
 }
