@@ -73,12 +73,12 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDAO.getProductById(productId);
         User user = userService.findUserByUsername(username);
 
-        Optional<Bucket> optionalBucket = bucketService.findBucketByUserAndStatus(user, BucketStatus.CURRENT);
+        List<Bucket> buckets = bucketService.findBucketsByUserAndBucketStatus(user, BucketStatus.CURRENT);
 
         // Найти корзинку пользователя или создать новую
-        if (optionalBucket.isPresent()) {
+        if (!buckets.isEmpty()) {
 
-            Bucket bucket = optionalBucket.get();
+            Bucket bucket = buckets.get(0);
 
             // ищется деталь заказа (по корзинке и продукту)
             Optional<BucketDetails> optionalBucketDetails =
@@ -134,12 +134,12 @@ public class ProductServiceImpl implements ProductService {
         User user = userService.findUserByUsername(username);
 
         // Ищется корзинка (по пользователю и статусу корзинки)
-        Optional<Bucket> optionalBucket = bucketService.findBucketByUserAndStatus(user, BucketStatus.CURRENT);
+        List<Bucket> buckets = bucketService.findBucketsByUserAndBucketStatus(user, BucketStatus.CURRENT);
 
-        if (optionalBucket.isPresent()) {
+        if (!buckets.isEmpty()) {
 
             // Если корзинка найдена, то
-            Bucket bucket = optionalBucket.get();
+            Bucket bucket = buckets.get(0);
 
             // Ищется деталь заказа по продукту и корзинке
             Optional<BucketDetails> optionalBucketDetails =
