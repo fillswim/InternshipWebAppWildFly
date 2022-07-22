@@ -11,11 +11,15 @@ import java.util.Optional;
 
 public interface BucketDetailsService {
 
-    List<BucketDetailsDTO> findAllBucketDetailsForUserDTOS(String username, BucketStatus bucketStatus);
+    List<BucketDetailsDTO> findAllBucketDetailsForCurrentBucketOfUser(String username);
 
     void saveBucketDetails(BucketDetails bucketDetails);
 
     void deleteBucketDetails(BucketDetails bucketDetails);
+
+    List<BucketDetails> findBucketDetailsByBucket(Bucket bucket);
+
+    List<BucketDetailsDTO> findBucketDetailsDTOByBucket(Bucket bucket);
 
     Optional<BucketDetails> findBucketDetailsByBucketAndProduct(Bucket bucket, Product product);
 

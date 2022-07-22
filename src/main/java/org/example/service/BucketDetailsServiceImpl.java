@@ -34,21 +34,32 @@ public class BucketDetailsServiceImpl implements BucketDetailsService{
     }
 
     @Override
-    public List<BucketDetailsDTO> findAllBucketDetailsForUserDTOS(String username, BucketStatus bucketStatus) {
+    public List<BucketDetailsDTO> findAllBucketDetailsForCurrentBucketOfUser(String username) {
 
         User user = userService.findUserByUsername(username);
 
-        Optional<Bucket> bucketOptional = bucketService.findBucketByUserAndStatus(user, bucketStatus);
+        List<Bucket> buckets = bucketService.findBucketsByUserAndBucketStatus(user, BucketStatus.CURRENT);
 
-        if (bucketOptional.isPresent()) {
-            return bucketDetailsDAO.findBucketDetailsByBucket(bucketOptional.get()).stream()
-                    .map(bucketDetailsMapper::mapToBucketDetailsDTO)
-                    .collect(Collectors.toList());
-        } else {
+        List<BucketDetailsDTO> bucketDetailsDTOS = null;
 
-            return null;
+        // Если корзинка существует,
+        if (!buckets.isEmpty()) {
+
+            Bucket bucket = buckets.get(0);
+
+            List<BucketDetails> bucketDetailsList = findBucketDetailsByBucket(bucket);
+
+            // то смотрим, есть ли в ней детали заказов
+            if (!bucketDetailsList.isEmpty()) {
+
+                bucketDetailsDTOS = bucketDetailsList.stream()
+                        .map(bucketDetailsMapper::mapToBucketDetailsDTO)
+                        .collect(Collectors.toList());
+            }
+
         }
 
+        return bucketDetailsDTOS;
     }
 
     @Override
@@ -59,6 +70,19 @@ public class BucketDetailsServiceImpl implements BucketDetailsService{
     @Override
     public void deleteBucketDetails(BucketDetails bucketDetails) {
         bucketDetailsDAO.deleteBucketDetails(bucketDetails);
+    }
+
+    @Override
+    public List<BucketDetails> findBucketDetailsByBucket(Bucket bucket) {
+        return bucketDetailsDAO.findBucketDetailsByBucket(bucket);
+    }
+
+    @Override
+    public List<BucketDetailsDTO> findBucketDetailsDTOByBucket(Bucket bucket) {
+
+        return findBucketDetailsByBucket(bucket).stream()
+                .map(bucketDetailsMapper::mapToBucketDetailsDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
