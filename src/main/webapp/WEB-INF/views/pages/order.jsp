@@ -2,9 +2,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div style="padding: 5px;">
 
-    <h3>Bucket:</h3>
+    <h3>Order #: </h3>
 
-    <table id="productsTable">
+    <table id="orderTable">
 
         <thead>
         <tr>
@@ -29,12 +29,6 @@
         </tbody>
 
     </table>
-
-    <div style="float: left">
-        <form:form action="${pageContext.request.contextPath}/orders/createOrder" method="GET">
-            <input id="createOrderButton" type="submit" value="Create order" />
-        </form:form>
-    </div>
 
 
 </div>

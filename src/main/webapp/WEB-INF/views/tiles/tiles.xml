@@ -55,4 +55,16 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
     </definition>
 
+    <!--Orders page-->
+    <definition name="orders" extends="template-def">
+        <put-attribute name="title" value="Orders" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/orders.jsp" />
+    </definition>
+
+    <!--Order page-->
+    <definition name="order" extends="template-def">
+        <put-attribute name="title" value="Order" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/order.jsp" />
+    </definition>
+
 </tiles-definitions>

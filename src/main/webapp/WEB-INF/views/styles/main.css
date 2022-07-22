@@ -3,7 +3,8 @@
     height: 100%;
 }
 
-#productsTable, #manufacturersTable, #usersTable, #headerTable {
+#productsTable, #manufacturersTable, #usersTable,
+#headerTable, #ordersTable, #ordersButton, #orderTable {
     width: 100%;
 }
 
@@ -18,12 +19,16 @@
 #productsTable td, #productsTable th,
 #manufacturersTable td, #manufacturersTable th,
 #usersTable td, #usersTable th,
-#productEditTable td {
+#productEditTable td,
+#ordersTable td, #ordersTable th,
+#orderTable td, #orderTable th {
     border: 1px solid #ddd;
 }
 
 #productsTable th, #manufacturersTable th,
-#usersTable th, #usersTable th {
+#usersTable th, #usersTable th,
+#ordersTable th,
+#orderTable th{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -39,7 +44,7 @@
     text-align: center;
 }
 
-#addButton, #saveProductsButton{
+#addButton, #saveProductsButton {
     width: 20%;
     float: initial;
 }
