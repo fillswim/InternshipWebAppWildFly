@@ -7,6 +7,7 @@ import org.example.models.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,9 +21,14 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Optional<Bucket> findBucketByUserAndStatus(User user, BucketStatus bucketStatus) {
+    public List<Bucket> findBucketsByUserAndBucketStatus(User user, BucketStatus bucketStatus) {
 
-        return bucketDAO.findBucketByUserAndStatus(user, bucketStatus);
+        return bucketDAO.findBucketsByUserAndStatus(user, bucketStatus);
+    }
+
+    @Override
+    public Optional<Bucket> findBucketById(int bucketId) {
+        return bucketDAO.findBucketById(bucketId);
     }
 
     @Override
