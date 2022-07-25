@@ -1,9 +1,8 @@
 package org.example.controller;
 
-import org.example.dto.BucketDetailsDTO;
+import org.example.dto.BucketDTO;
 import org.example.dto.InfoDTO;
-import org.example.mappers.BucketDetailsMapper;
-import org.example.service.BucketDetailsService;
+import org.example.service.BucketService;
 import org.example.service.InfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,23 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/buckets")
 public class BucketController {
 
     private final InfoService infoService;
-    private final BucketDetailsService bucketDetailsService;
 
-    private final BucketDetailsMapper bucketDetailsMapper;
+    private final BucketService bucketService;
 
     public BucketController(InfoService infoService,
-                            BucketDetailsService bucketDetailsService,
-                            BucketDetailsMapper bucketDetailsMapper) {
+                            BucketService bucketService) {
         this.infoService = infoService;
-        this.bucketDetailsService = bucketDetailsService;
-        this.bucketDetailsMapper = bucketDetailsMapper;
+        this.bucketService = bucketService;
     }
 
     @GetMapping
@@ -37,9 +32,8 @@ public class BucketController {
 
             String username = principal.getName();
 
-            List<BucketDetailsDTO> bucketDetailsDTOS =
-                    bucketDetailsService.findAllBucketDetailsForCurrentBucketOfUser(username);
-            model.addAttribute("bucketDetails", bucketDetailsDTOS);
+            BucketDTO currentBucket = bucketService.findCurrentBucketOfUser(username);
+            model.addAttribute("bucket", currentBucket);
 
             InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
             model.addAttribute("infoDTO", infoDTO);
