@@ -61,20 +61,6 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void deleteProduct(int productId) {
-
-        Session session = sessionFactory.getCurrentSession();
-
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaDelete<Product> criteriaDelete = criteriaBuilder.createCriteriaDelete(Product.class);
-
-        Root<Product> root = criteriaDelete.from(Product.class);
-        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), productId));
-
-        session.createQuery(criteriaDelete).executeUpdate();
-    }
-
-    @Override
     public void deleteProduct(Product product) {
 
         Session session = sessionFactory.getCurrentSession();
