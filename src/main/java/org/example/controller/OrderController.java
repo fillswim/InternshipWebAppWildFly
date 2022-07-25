@@ -1,11 +1,7 @@
 package org.example.controller;
 
-import org.example.dto.BucketDetailsDTO;
 import org.example.dto.InfoDTO;
 import org.example.dto.OrderDTO;
-import org.example.models.Bucket;
-import org.example.service.BucketDetailsService;
-import org.example.service.BucketService;
 import org.example.service.InfoService;
 import org.example.service.OrderService;
 import org.springframework.stereotype.Controller;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/orders")
@@ -26,18 +21,10 @@ public class OrderController {
 
     private final InfoService infoService;
 
-    private final BucketService bucketService;
-
-    private final BucketDetailsService bucketDetailsService;
-
     public OrderController(OrderService orderService,
-                           InfoService infoService,
-                           BucketService bucketService,
-                           BucketDetailsService bucketDetailsService) {
+                           InfoService infoService) {
         this.orderService = orderService;
         this.infoService = infoService;
-        this.bucketService = bucketService;
-        this.bucketDetailsService = bucketDetailsService;
     }
 
     @GetMapping
@@ -73,20 +60,11 @@ public class OrderController {
     }
 
     @GetMapping("/showOrder")
-    public String showOrder(@RequestParam("orderId") int orderId,
-                            Model model) {
+    public String showOrder(@RequestParam("orderId") int orderId, Model model) {
 
-        Optional<Bucket> optionalBucket = bucketService.findBucketById(orderId);
+        OrderDTO orderDTO = orderService.findOrderByUsernameAndId(orderId);
 
-        List<BucketDetailsDTO> bucketDetailsDTOS = null;
-
-        if (optionalBucket.isPresent()) {
-            Bucket bucket = optionalBucket.get();
-
-            bucketDetailsDTOS = bucketDetailsService.findBucketDetailsDTOByBucket(bucket);
-        }
-
-        model.addAttribute("bucketDetails", bucketDetailsDTOS);
+        model.addAttribute("order", orderDTO);
 
         InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
         model.addAttribute("infoDTO", infoDTO);
