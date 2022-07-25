@@ -1,7 +1,6 @@
 package org.example.models;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -31,6 +30,8 @@ public class Bucket {
 
     @Enumerated(EnumType.STRING)
     private BucketStatus bucketStatus;
+
+    private double sum;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
