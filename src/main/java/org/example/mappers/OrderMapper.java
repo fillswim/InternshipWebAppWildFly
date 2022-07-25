@@ -1,19 +1,29 @@
 package org.example.mappers;
 
 import org.example.dto.OrderDTO;
-import org.example.models.Bucket;
+import org.example.models.Order;
 import org.springframework.stereotype.Service;
+
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class OrderMapper {
 
-    public OrderDTO mapToOrderDTO(Bucket bucket) {
+    private final BucketMapper bucketMapper;
+
+    public OrderMapper(BucketMapper bucketMapper) {
+        this.bucketMapper = bucketMapper;
+    }
+
+    public OrderDTO mapToOrderDTO(Order order) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy");
 
         return OrderDTO.builder()
-                .id(bucket.getId())
-                .date(bucket.getUpdated())
-                .status(bucket.getBucketStatus().name())
-                .sum(0.0)
+                .id(order.getId())
+                .date(order.getUpdated().format(formatter))
+                .address(order.getAddress())
+                .bucketDTO(bucketMapper.mapToBucketDTO(order.getBucket()))
                 .build();
 
     }
