@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,10 +13,10 @@ public class OrderDTO {
 
     private int id;
 
-    private LocalDateTime date;
+    private String date;
 
-    private String status;
+    private String address;
 
-    private double sum;
+    private BucketDTO bucketDTO;
 
 }
