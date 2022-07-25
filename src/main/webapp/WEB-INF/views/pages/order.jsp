@@ -2,7 +2,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div style="padding: 5px;">
 
-    <h3>Order #: </h3>
+    <h3>Order # ${order.id}: </h3>
+
+    <table id="orderHeaderTable">
+        <tr>
+            <td>
+                <div style="text-align: left">
+                    <h4>Address: ${order.address}</h4>
+                </div>
+            </td>
+            <td>
+                <div style="text-align: right">
+                    <h2>Sum: ${order.bucketDTO.sum}</h2>
+                </div>
+            </td>
+        </tr>
+    </table>
 
     <table id="orderTable">
 
@@ -16,7 +31,7 @@
         </thead>
 
         <tbody>
-        <c:forEach var="detail" items="${bucketDetails}">
+        <c:forEach var="detail" items="${order.bucketDTO.bucketDetailsDTOS}">
 
             <tr>
                 <td style="width: 25%">${detail.productTitle}</td>

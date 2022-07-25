@@ -11,7 +11,7 @@
             <th>Order number</th>
             <th>Date</th>
             <th>Sum</th>
-            <th>Status</th>
+            <th>Address</th>
             <th>Operation</th>
         </tr>
         </thead>
@@ -26,8 +26,8 @@
             <tr>
                 <td style="width: 20%; text-align: center">${detail.id}</td>
                 <td style="width: 20%; text-align: center">${detail.date}</td>
-                <td style="width: 20%; text-align: center">${detail.sum}</td>
-                <td style="width: 20%; text-align: center">${detail.status}</td>
+                <td style="width: 20%; text-align: center">${detail.bucketDTO.sum}</td>
+                <td style="width: 20%; text-align: center">${detail.address}</td>
                 <td style="width: 20%; text-align: center">
 
                     <input type="button" value="Show order" style="width: 100%"

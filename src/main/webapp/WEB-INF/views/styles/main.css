@@ -4,7 +4,8 @@
 }
 
 #productsTable, #manufacturersTable, #usersTable,
-#headerTable, #ordersTable, #ordersButton, #orderTable {
+#headerTable, #ordersTable, #ordersButton, #orderTable,
+#bucketHeaderTable, #orderHeaderTable {
     width: 100%;
 }
 
@@ -39,13 +40,18 @@
 #titleField, #priceField,
 #manufacturerField, #manufacturersButton,
 #editProductsButton, #returnToAllProductsButton, #bucketButton,
-#usersButton {
+#usersButton, #createOrderDiv {
     width: 100%;
     text-align: center;
 }
 
 #addButton, #saveProductsButton {
     width: 20%;
+    float: initial;
+}
+
+#createOrderButton {
+    width: 50%;
     float: initial;
 }
 

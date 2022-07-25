@@ -2,7 +2,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div style="padding: 5px;">
 
-    <h3>Bucket:</h3>
+    <h3>Current bucket:</h3>
+
+    <table id="bucketHeaderTable">
+        <tr>
+            <td>
+                <div style="text-align: left">
+                    created: ${bucket.created}
+                </div>
+            </td>
+            <td>
+                <div style="text-align: right">
+                    <h2>Sum: ${bucket.sum}</h2>
+                </div>
+            </td>
+        </tr>
+    </table>
 
     <table id="productsTable">
 
@@ -16,7 +31,7 @@
         </thead>
 
         <tbody>
-        <c:forEach var="detail" items="${bucketDetails}">
+        <c:forEach var="detail" items="${bucket.bucketDetailsDTOS}">
 
             <tr>
                 <td style="width: 25%">${detail.productTitle}</td>
@@ -29,8 +44,9 @@
         </tbody>
 
     </table>
+    <br>
 
-    <div style="float: left">
+    <div id="createOrderDiv">
         <form:form action="${pageContext.request.contextPath}/orders/createOrder" method="GET">
             <input id="createOrderButton" type="submit" value="Create order" />
         </form:form>
