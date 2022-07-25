@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.dto.BucketDTO;
 import org.example.models.Bucket;
 import org.example.models.BucketStatus;
 import org.example.models.User;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BucketService {
+
+    BucketDTO findCurrentBucketOfUser(String username);
 
     List<Bucket> findBucketsByUserAndBucketStatus(User user, BucketStatus bucketStatus);
 
