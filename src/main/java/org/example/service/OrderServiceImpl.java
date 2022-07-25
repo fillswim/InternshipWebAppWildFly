@@ -1,15 +1,14 @@
 package org.example.service;
 
+import org.example.dao.OrderDAO;
 import org.example.dto.OrderDTO;
 import org.example.mappers.OrderMapper;
-import org.example.models.Bucket;
-import org.example.models.BucketDetails;
-import org.example.models.BucketStatus;
-import org.example.models.User;
+import org.example.models.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,13 +23,18 @@ public class OrderServiceImpl implements OrderService{
 
     private final OrderMapper orderMapper;
 
+    private final OrderDAO orderDAO;
+
     public OrderServiceImpl(BucketService bucketService,
                             BucketDetailsService bucketDetailsService,
-                            UserService userService, OrderMapper orderMapper) {
+                            UserService userService,
+                            OrderMapper orderMapper,
+                            OrderDAO orderDAO) {
         this.bucketService = bucketService;
         this.bucketDetailsService = bucketDetailsService;
         this.userService = userService;
         this.orderMapper = orderMapper;
+        this.orderDAO = orderDAO;
     }
 
     @Override
@@ -38,9 +42,9 @@ public class OrderServiceImpl implements OrderService{
 
         User user = userService.findUserByUsername(username);
 
-        List<Bucket> buckets = bucketService.findBucketsByUserAndBucketStatus(user, BucketStatus.COMPLETED);
+        List<Order> orders = orderDAO.findAllOrdersByUser(user);
 
-        return buckets.stream()
+        return orders.stream()
                 .map(orderMapper::mapToOrderDTO)
                 .collect(Collectors.toList());
 
@@ -65,10 +69,28 @@ public class OrderServiceImpl implements OrderService{
             // то смотрим, есть ли в ней детали заказов
             if (!bucketDetailsList.isEmpty()) {
 
-                bucket.setBucketStatus(BucketStatus.COMPLETED);
-                bucketService.saveBucket(bucket);
+                // Подсчет стоимости корзинки
+                double sum = 0.0;
+                for (BucketDetails bucketDetails : bucketDetailsList) {
 
-                // Создание и сохранение новой корзинки для текущих покупок
+                    double sumDetail = bucketDetails.getProduct().getPrice() * bucketDetails.getAmount();
+                    sum = sum + sumDetail;
+                }
+
+                bucket.setSum(sum);
+                bucket.setBucketStatus(BucketStatus.COMPLETED);
+
+                // Создается заказ
+                Order order = Order.builder()
+                        .address("Test address")
+                        .bucket(bucket)
+                        .user(user)
+                        .build();
+
+                // Сохраняется заказ
+                orderDAO.saveOrder(order);
+
+                // Создание и сохранение новой корзинки для новых покупок
                 Bucket newCurrentBucket = Bucket.builder()
                         .user(user)
                         .bucketStatus(BucketStatus.CURRENT)
@@ -80,5 +102,28 @@ public class OrderServiceImpl implements OrderService{
 
         }
 
+    }
+
+    @Override
+    public void saveOrder(Order order) {
+
+        orderDAO.saveOrder(order);
+    }
+
+    @Override
+    public OrderDTO findOrderByUsernameAndId(int orderId) {
+
+        OrderDTO orderDTO = null;
+
+        Optional<Order> optionalOrder = orderDAO.findOrderByUserAndId(orderId);
+
+        if (optionalOrder.isPresent()) {
+
+            Order order = optionalOrder.get();
+
+            orderDTO = orderMapper.mapToOrderDTO(order);
+        }
+
+        return orderDTO;
     }
 }
