@@ -36,4 +36,15 @@ public class User {
     @ToString.Exclude
     List<Bucket> buckets;
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @ToString.Exclude
+    List<Order> orders;
+
+
+
+
 }
