@@ -112,14 +112,6 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="created" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="updated" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-
             <column name="bucketStatus" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>

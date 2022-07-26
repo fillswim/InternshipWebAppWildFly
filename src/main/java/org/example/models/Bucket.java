@@ -22,12 +22,6 @@ public class Bucket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @CreationTimestamp
-    private LocalDateTime created;
-
-    @UpdateTimestamp
-    private LocalDateTime updated;
-
     @Enumerated(EnumType.STRING)
     private BucketStatus bucketStatus;
 

@@ -4,20 +4,9 @@
 
     <h3>Current bucket:</h3>
 
-    <table id="bucketHeaderTable">
-        <tr>
-            <td>
-                <div style="text-align: left">
-                    created: ${bucket.created}
-                </div>
-            </td>
-            <td>
-                <div style="text-align: right">
-                    <h2>Sum: ${bucket.sum}</h2>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div style="text-align: right">
+        <h2>Sum: ${bucket.sum}</h2>
+    </div>
 
     <table id="productsTable">
 

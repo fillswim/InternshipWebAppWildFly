@@ -5,7 +5,7 @@
 
 #productsTable, #manufacturersTable, #usersTable,
 #headerTable, #ordersTable, #ordersButton, #orderTable,
-#bucketHeaderTable, #orderHeaderTable {
+#orderHeaderTable {
     width: 100%;
 }
 
