@@ -55,12 +55,6 @@
 
     </form:form>
 
-<%--    <div id="createOrderDiv">--%>
-<%--        <form:form action="${pageContext.request.contextPath}/orders/createOrder" method="GET">--%>
-<%--            <input id="createOrderButton" type="submit" value="Create order" />--%>
-<%--        </form:form>--%>
-<%--    </div>--%>
-
 
 </div>
 
