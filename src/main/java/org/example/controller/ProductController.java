@@ -4,10 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dto.InfoDTO;
 import org.example.dto.ManufacturerDTO;
 import org.example.dto.ProductDTO;
-import org.example.mappers.ProductMapper;
 import org.example.models.Manufacturer;
 import org.example.models.Product;
-import org.example.service.BucketDetailsService;
 import org.example.service.InfoService;
 import org.example.service.ManufacturerService;
 import org.example.service.ProductService;
@@ -30,23 +28,15 @@ public class ProductController {
 
     private final ProductService productService;
 
-    private final BucketDetailsService bucketDetailsService;
-
-    private final ProductMapper productMapper;
-
     private final ManufacturerService manufacturerService;
 
 
     @Autowired
     public ProductController(InfoService infoService,
                              ProductService productService,
-                             BucketDetailsService bucketDetailsService,
-                             ProductMapper productMapper,
                              ManufacturerService manufacturerService) {
         this.infoService = infoService;
         this.productService = productService;
-        this.bucketDetailsService = bucketDetailsService;
-        this.productMapper = productMapper;
         this.manufacturerService = manufacturerService;
     }
 

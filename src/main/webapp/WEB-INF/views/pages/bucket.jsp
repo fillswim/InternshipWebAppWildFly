@@ -35,11 +35,31 @@
     </table>
     <br>
 
-    <div id="createOrderDiv">
-        <form:form action="${pageContext.request.contextPath}/orders/createOrder" method="GET">
-            <input id="createOrderButton" type="submit" value="Create order" />
-        </form:form>
-    </div>
+    <form:form action="${pageContext.request.contextPath}/orders/createOrder"
+               modelAttribute="order" method="post">
+
+        <table id="orderDetailsTable">
+            <tr>
+                <td>Address</td>
+                <td><form:input path="address" id="addressField"/></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><form:input path="description" id="descriptionField"/> </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <input type="submit" id="createOrderButton" value="Create order">
+
+    </form:form>
+
+<%--    <div id="createOrderDiv">--%>
+<%--        <form:form action="${pageContext.request.contextPath}/orders/createOrder" method="GET">--%>
+<%--            <input id="createOrderButton" type="submit" value="Create order" />--%>
+<%--        </form:form>--%>
+<%--    </div>--%>
 
 
 </div>

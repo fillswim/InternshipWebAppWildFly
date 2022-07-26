@@ -23,6 +23,7 @@ public class OrderMapper {
                 .id(order.getId())
                 .date(order.getUpdated().format(formatter))
                 .address(order.getAddress())
+                .description(order.getDescription())
                 .bucketDTO(bucketMapper.mapToBucketDTO(order.getBucket()))
                 .build();
 

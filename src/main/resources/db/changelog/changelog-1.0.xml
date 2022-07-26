@@ -241,6 +241,10 @@
                 <constraints nullable="true"/>
             </column>
 
+            <column name="description" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="user_id" type="int"/>
 
             <column name="bucket_id" type="int"/>

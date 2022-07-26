@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+#orderDetailsTable {
+    width: 50%;
+}
+
 #productEditTable {
     width: 40%;
 }
@@ -22,14 +26,14 @@
 #usersTable td, #usersTable th,
 #productEditTable td,
 #ordersTable td, #ordersTable th,
-#orderTable td, #orderTable th {
+#orderTable td, #orderTable th,
+#orderDetailsTable td, #orderDetailsTable th {
     border: 1px solid #ddd;
 }
 
 #productsTable th, #manufacturersTable th,
 #usersTable th, #usersTable th,
-#ordersTable th,
-#orderTable th{
+#ordersTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -40,7 +44,7 @@
 #titleField, #priceField,
 #manufacturerField, #manufacturersButton,
 #editProductsButton, #returnToAllProductsButton, #bucketButton,
-#usersButton, #createOrderDiv {
+#usersButton, #createOrderDiv, #addressField, #descriptionField {
     width: 100%;
     text-align: center;
 }

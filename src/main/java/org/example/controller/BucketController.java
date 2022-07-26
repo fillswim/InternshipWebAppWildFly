@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.dto.BucketDTO;
 import org.example.dto.InfoDTO;
+import org.example.dto.OrderDTO;
 import org.example.service.BucketService;
 import org.example.service.InfoService;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,9 @@ public class BucketController {
 
             BucketDTO currentBucket = bucketService.findCurrentBucketOfUser(username);
             model.addAttribute("bucket", currentBucket);
+
+            OrderDTO orderDTO = new OrderDTO();
+            model.addAttribute("order", orderDTO);
 
             InfoDTO infoDTO = infoService.getInfoDTOBuId(0);
             model.addAttribute("infoDTO", infoDTO);

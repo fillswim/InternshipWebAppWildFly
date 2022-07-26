@@ -11,6 +11,13 @@
                     <h4>Address: ${order.address}</h4>
                 </div>
             </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="text-align: left">
+                    <h4>Description: ${order.description}</h4>
+                </div>
+            </td>
             <td>
                 <div style="text-align: right">
                     <h2>Sum: ${order.bucketDTO.sum}</h2>

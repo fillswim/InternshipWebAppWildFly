@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void createOrder(String username) {
+    public void createOrder(String username, OrderDTO orderDTO) {
 
         User user = userService.findUserByUsername(username);
 
@@ -82,7 +82,8 @@ public class OrderServiceImpl implements OrderService{
 
                 // Создается заказ
                 Order order = Order.builder()
-                        .address("Test address")
+                        .address(orderDTO.getAddress())
+                        .description(orderDTO.getDescription())
                         .bucket(bucket)
                         .user(user)
                         .build();

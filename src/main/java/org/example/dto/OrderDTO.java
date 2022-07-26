@@ -17,6 +17,8 @@ public class OrderDTO {
 
     private String address;
 
+    private String description;
+
     private BucketDTO bucketDTO;
 
 }

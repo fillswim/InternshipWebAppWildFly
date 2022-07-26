@@ -6,9 +6,7 @@ import org.example.service.InfoService;
 import org.example.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -49,12 +47,13 @@ public class OrderController {
     }
 
 
-    @GetMapping("/createOrder")
-    public String createOrder(Principal principal) {
+    @PostMapping("/createOrder")
+    public String createOrder(@ModelAttribute("order") OrderDTO orderDTO,
+                              Principal principal) {
 
         String username = principal.getName();
 
-        orderService.createOrder(username);
+        orderService.createOrder(username, orderDTO);
 
         return "redirect:/orders";
     }
