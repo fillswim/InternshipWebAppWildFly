@@ -52,4 +52,11 @@ public class UserDAOImpl implements UserDAO {
         return query.getSingleResult();
     }
 
+    @Override
+    public void saveUser(User user) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(user);
+    }
+
 }

@@ -59,13 +59,14 @@
     float: initial;
 }
 
-#loginButton, #logoutButton {
+#loginButton, #logoutButton, #registerButton {
     width: 125px;
 }
 
 
 /*Login page*/
 .error {
+    text-align: center;
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -76,6 +77,7 @@
 }
 
 .msg {
+    text-align: center;
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -85,8 +87,8 @@
     border-color: #bce8f1;
 }
 
-#login-box {
-    width: 300px;
+#login-box, #register-box {
+    width: 330px;
     padding: 20px;
     margin: 100px auto;
     background: #fff;

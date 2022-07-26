@@ -11,4 +11,6 @@ public interface UserDAO {
 
     User loadUserByUsername(String username);
 
+    void saveUser(User user);
+
 }

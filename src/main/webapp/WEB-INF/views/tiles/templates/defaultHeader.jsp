@@ -22,6 +22,11 @@
                                 <input id="loginButton" type="submit" value="Log in" />
                             </form:form>
                         </div>
+                        <div style="float: right">
+                            <form:form action="${pageContext.request.contextPath}/register" method="GET">
+                                <input id="registerButton" type="submit" value="Register" />
+                            </form:form>
+                        </div>
 
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">

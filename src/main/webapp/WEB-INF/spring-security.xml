@@ -6,7 +6,11 @@
 						http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/login" access="permitAll()"/>
+        <intercept-url pattern="/register" access="permitAll()"/>
+        <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/manufacturers**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/editProducts**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')"/>
 
         <form-login
                 login-page="/login"
