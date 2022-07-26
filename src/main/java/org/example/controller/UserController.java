@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping
-    public String showAllProducts(Model model) {
+    public String showAllUsers(Model model) {
 
         List<UserDTO> userDTOS = userService.getAllUserDTOS();
         model.addAttribute("users", userDTOS);
