@@ -44,7 +44,4 @@ public class User {
     @ToString.Exclude
     List<Order> orders;
 
-
-
-
 }
