@@ -52,7 +52,7 @@ public class ProductController {
         return "products-All-for-Customers";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/editProducts")
     public String showAllProductsForAdmins(Model model) {
 
         List<ProductDTO> productDTOS = productService.getAllProductsDTOS();
@@ -119,7 +119,7 @@ public class ProductController {
 
         }
 
-        return "redirect:/edit";
+        return "redirect:/editProducts";
     }
 
     @GetMapping("/updateProduct")
@@ -144,7 +144,7 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         productService.deleteProduct(product);
 
-        return "redirect:/edit";
+        return "redirect:/editProducts";
     }
 
     @GetMapping("/addProductToBucket")
