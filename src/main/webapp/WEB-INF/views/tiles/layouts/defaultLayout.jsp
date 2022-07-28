@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="<c:url value="/styles/main.css" context="/test/app01"/>">
     <script src="<c:url value="/scripts/main.js" context="/test/app01"/>"></script>
+    <script src="<c:url value="/scripts/jquery-3.6.0.min.js" context="/test/app01"/>"></script>
 
 </head>
 
