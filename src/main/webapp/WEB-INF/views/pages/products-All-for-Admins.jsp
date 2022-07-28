@@ -25,13 +25,15 @@
                 <c:param name="productId" value="${detail.id}"/>
             </c:url>
 
-            <tr>
+            <tr id="productRow">
                 <td style="width: 20%">${detail.title}</td>
                 <td style="width: 20%; text-align: center">${detail.manufacturerTitle}</td>
                 <td style="width: 20%; text-align: center">${detail.price}</td>
                 <td style="width: 40%; text-align: center">
-                    <input type="button" value="Update" style="width: 49%"
-                           onclick="window.location.href = '${addButton}'"/>
+                    <input id="editProductButton" type="button" value="Edit" style="width: 49%"/>
+<%--                    <input id="editProductButton" type="button" value="Edit" style="width: 49%"/>--%>
+<%--                    <input type="button" value="Update" style="width: 49%"--%>
+<%--                           onclick="window.location.href = '${addButton}'"/>--%>
                     <input type="button" value="Delete" style="width: 49%"
                            onclick="window.location.href = '${deleteButton}'"/>
                 </td>
@@ -48,4 +50,20 @@
            onclick="window.location.href='addNewProduct'">
 
 </div>
+
+<script type="text/javascript">
+
+    let buttons = $("input#editProductButton");
+    let rows = $("tr#productRow");
+
+    $("input#editProductButton").click(function () {
+        let row = $(this).closest("tr");
+        let index = row.parent().children("tr").index(row);
+        console.log(rows[index]);
+
+    });
+
+
+</script>
+
 
